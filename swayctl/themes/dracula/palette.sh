@@ -1,0 +1,37 @@
+# dracula — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=282a36
+C_MANTLE=242530
+C_CRUST=20222c
+C_SURFACE0=2b2d3a
+C_SURFACE1=2e303e
+C_SURFACE2=313442
+C_OVERLAY=44475a
+C_TEXT=f8f8f2
+C_SUBTEXT0=afafb0
+C_SUBTEXT1=d8d9d5
+C_ACCENT=f1fa8c
+C_RED=ff5555
+C_GREEN=50fa7b
+C_YELLOW=f1fa8c
+C_BLUE=bd93f9
+C_PURPLE=ff79c6
+C_PINK=ff92df
+C_TEAL=8be9fd
+C_ORANGE=ffb86c
+C_T0=21222c
+C_T1=ff5555
+C_T2=50fa7b
+C_T3=f1fa8c
+C_T4=bd93f9
+C_T5=ff79c6
+C_T6=8be9fd
+C_T7=f8f8f2
+C_TB0=6272a4
+C_TB1=ff6e6e
+C_TB2=69ff94
+C_TB3=ffffa5
+C_TB4=d6acff
+C_TB5=ff92df
+C_TB6=a4ffff
+C_TB7=ffffff

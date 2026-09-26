@@ -1,0 +1,37 @@
+# nord — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=2e3440
+C_MANTLE=292e39
+C_CRUST=252a34
+C_SURFACE0=313845
+C_SURFACE1=353c4a
+C_SURFACE2=39404f
+C_OVERLAY=3b4252
+C_TEXT=d8dee9
+C_SUBTEXT0=9ca2ad
+C_SUBTEXT1=bec4cf
+C_ACCENT=ebcb8b
+C_RED=bf616a
+C_GREEN=a3be8c
+C_YELLOW=ebcb8b
+C_BLUE=81a1c1
+C_PURPLE=b48ead
+C_PINK=b48ead
+C_TEAL=88c0d0
+C_ORANGE=d08770
+C_T0=3b4252
+C_T1=bf616a
+C_T2=a3be8c
+C_T3=ebcb8b
+C_T4=81a1c1
+C_T5=b48ead
+C_T6=88c0d0
+C_T7=e5e9f0
+C_TB0=596377
+C_TB1=bf616a
+C_TB2=a3be8c
+C_TB3=ebcb8b
+C_TB4=81a1c1
+C_TB5=b48ead
+C_TB6=8fbcbb
+C_TB7=eceff4

@@ -1,0 +1,37 @@
+# catppuccin — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=232634
+C_MANTLE=1f222e
+C_CRUST=1c1f2a
+C_SURFACE0=252938
+C_SURFACE1=282c3c
+C_SURFACE2=2b2f40
+C_OVERLAY=51576d
+C_TEXT=c6d0f5
+C_SUBTEXT0=8c94b1
+C_SUBTEXT1=adb6d8
+C_ACCENT=ef9f76
+C_RED=f38ba8
+C_GREEN=a6e3a1
+C_YELLOW=f9e2af
+C_BLUE=89b4fa
+C_PURPLE=f5c2e7
+C_PINK=f2aede
+C_TEAL=94e2d5
+C_ORANGE=e5c890
+C_T0=45475a
+C_T1=f38ba8
+C_T2=a6e3a1
+C_T3=f9e2af
+C_T4=89b4fa
+C_T5=f5c2e7
+C_T6=94e2d5
+C_T7=a6adc8
+C_TB0=585b70
+C_TB1=f37799
+C_TB2=89d88b
+C_TB3=ebd391
+C_TB4=74a8fc
+C_TB5=f2aede
+C_TB6=6bd7ca
+C_TB7=bac2de

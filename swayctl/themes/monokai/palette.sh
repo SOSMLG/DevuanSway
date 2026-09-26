@@ -1,0 +1,37 @@
+# monokai — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=272822
+C_MANTLE=23241e
+C_CRUST=1f201b
+C_SURFACE0=2a2b24
+C_SURFACE1=2d2e27
+C_SURFACE2=30312a
+C_OVERLAY=3e3d32
+C_TEXT=f8f8f2
+C_SUBTEXT0=aeafa9
+C_SUBTEXT1=d8d8d2
+C_ACCENT=f92672
+C_RED=f4005f
+C_GREEN=98e024
+C_YELLOW=fd971f
+C_BLUE=9d65ff
+C_PURPLE=f4005f
+C_PINK=f4005f
+C_TEAL=58d1eb
+C_ORANGE=fd971f
+C_T0=1a1a1a
+C_T1=f4005f
+C_T2=98e024
+C_T3=fd971f
+C_T4=9d65ff
+C_T5=f4005f
+C_T6=58d1eb
+C_T7=c4c5b5
+C_TB0=625e4c
+C_TB1=f4005f
+C_TB2=98e024
+C_TB3=e0d561
+C_TB4=9d65ff
+C_TB5=f4005f
+C_TB6=58d1eb
+C_TB7=f6f6ef

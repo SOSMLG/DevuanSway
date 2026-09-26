@@ -1,0 +1,37 @@
+# kanagawa — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=1F1F28
+C_MANTLE=1b1b24
+C_CRUST=191920
+C_SURFACE0=21212b
+C_SURFACE1=23232e
+C_SURFACE2=262631
+C_OVERLAY=2A2A37
+C_TEXT=DCD7BA
+C_SUBTEXT0=999686
+C_SUBTEXT1=bfbba4
+C_ACCENT=ff9e3b
+C_RED=c34043
+C_GREEN=76946a
+C_YELLOW=c0a36e
+C_BLUE=7e9cd8
+C_PURPLE=957fb8
+C_PINK=938aa9
+C_TEAL=6a9589
+C_ORANGE=ffa066
+C_T0=090618
+C_T1=c34043
+C_T2=76946a
+C_T3=c0a36e
+C_T4=7e9cd8
+C_T5=957fb8
+C_T6=6a9589
+C_T7=c8c093
+C_TB0=727169
+C_TB1=e82424
+C_TB2=98bb6c
+C_TB3=e6c384
+C_TB4=7fb4ca
+C_TB5=938aa9
+C_TB6=7aa89f
+C_TB7=dcd7ba

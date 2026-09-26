@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# =======================================================
+# swayctl — the unified Sway desktop CLI (Omarchy-style router)
+# -------------------------------------------------------
+# One command for every desktop-surface action on this Sway
+# setup. Replaces the older `debsway` CLI (symlinked alias).
+#
+#   swayctl menu|launcher|run|theme|bg|bar|power|lock
+#   swayctl clip|shot|sound|wire|toggle|keys|status
+#   swayctl eng|update|doctor|setup
+#
+# Help:            swayctl help
+# Sub-help:        swayctl <group> help
+# Environment:     SwayCTL_HOME=<path>   override install dir
+# =======================================================
+
+set -uo pipefail
+
+CS_SELF="$(readlink -f "${BASH_SOURCE[0]}")"
+CS_BIN="$(cd "$(dirname "$CS_SELF")" && pwd)"
+CS_INSTALL="${SwayCTL_HOME:-$HOME/.local/share/swayctl}"
+
+if [ -n "${SwayCTL_HOME:-}" ] && [ -f "$CS_INSTALL/lib/common.sh" ]; then
+    LIB_DIR="$CS_INSTALL/lib"
+elif [ -f "$(cd "$CS_BIN/.." && pwd)/lib/common.sh" ]; then
+    REPO_ROOT="$(cd "$CS_BIN/.." && pwd)"
+    export SwayCTL_HOME="$REPO_ROOT"
+    LIB_DIR="$REPO_ROOT/lib"
+elif [ -f "$HOME/.local/share/swayctl/lib/common.sh" ]; then
+    LIB_DIR="$HOME/.local/share/swayctl/lib"
+else
+    echo "swayctl: could not locate lib/ (expected $CS_BIN/../lib or ~/.local/share/swayctl/lib)." >&2
+    echo "Run scripts/21-swayctl-cli.sh from SwaySetup to install." >&2
+    exit 1
+fi
+
+# shellcheck source=lib/common.sh
+source "$LIB_DIR/common.sh"
+# shellcheck source=lib/theme.sh
+source "$LIB_DIR/theme.sh"
+# shellcheck source=lib/actions.sh
+source "$LIB_DIR/actions.sh"
+# shellcheck source=lib/doctor.sh
+source "$LIB_DIR/doctor.sh"
+# shellcheck source=lib/setup.sh
+source "$LIB_DIR/setup.sh"
+# shellcheck source=lib/eng.sh
+source "$LIB_DIR/eng.sh"
+
+usage() {
+    cat <<'EOF'
+swayctl — unified Sway desktop CLI
+
+  launcher            open the app launcher (rofi — wofi fallback)
+  run                 run a command (rofi/wofi run mode)
+  menu [power]        command palette (apps + commands)
+  theme list|current|set <name>
+  bg [panel|set|cycle|random|reset|apply]
+  bar [restart|reload]
+  power               grid power menu (wlogout)
+  lock                themed lockscreen
+  kill                nuke stuck screenshot overlays (works while locked)
+  clip [pick|clear]   clipboard history (cliphist + rofi/wofi)
+  shot [full|area|annotate|record|menu]
+  sound [panel|up|down|mute]     (pactl + swaync OSD popup)
+  wire [panel|status] (nmcli)
+  toggle [night|dnd|touchpad|layout]
+  keys [--list]       keybinding cheat-sheet (parsed from sway config)
+  status [media|layout|updates]  bar module backends
+  eng <tool>          engineering launcher (octave|jupyter|scilab|qucs|kicad|matlab)
+  update [--apply]    check / install system + flatpak updates
+  doctor              session self-check
+  setup               first-run customization wizard
+  help                this text
+
+Environment:
+  SwayCTL_HOME=<path>  override install directory (dev/tests)
+  SwayCTL_ASSUME_YES=1 take defaults on all prompts
+EOF
+}
+
+case "${1:-}" in
+    help|-h|--help)          usage ;;
+    launcher)                cmd_launcher ;;
+    run)                     cmd_run ;;
+    menu)                    cmd_menu "${2:-}" ;;
+    theme)
+        case "${2:-list}" in
+            list)    theme_list ;;
+            current) echo "$(current_theme)" ;;
+            set)     [ -n "${3:-}" ] && theme_set "$3" || { d_err "usage: swayctl theme set <name>"; exit 1; } ;;
+            *)       usage ;;
+        esac
+        ;;
+    bg)                      cmd_bg "${2:-panel}" "${3:-}" ;;
+    bar)                     cmd_bar "${2:-reload}" ;;
+    power)                   exec wlogout -b 5 -L 300 -R 300 -T 400 -B 400 ;;
+    lock)                    cmd_lock ;;
+    kill)                    cmd_kill ;;
+    clip)                    cmd_clip "${2:-pick}" ;;
+    shot)                    cmd_shot "${2:-menu}" ;;
+    sound)                   cmd_sound "${2:-panel}" ;;
+    wire)                    cmd_wire "${2:-panel}" ;;
+    toggle)                  cmd_toggle "${2:-}" ;;
+    keys)                    cmd_keys "${2:-}" ;;
+    status)                  cmd_status "${2:-}" ;;
+    eng)                     cmd_eng "${2:-}" "${@:3}" ;;
+    update)                  cmd_update "${2:-}" ;;
+    doctor)                  doctor_run ;;
+    setup)                   cmd_setup ;;
+    *)                       usage ;;
+esac

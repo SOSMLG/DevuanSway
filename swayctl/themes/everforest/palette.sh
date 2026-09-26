@@ -1,0 +1,37 @@
+# everforest — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=2B3339
+C_MANTLE=262d33
+C_CRUST=23292e
+C_SURFACE0=2e373d
+C_SURFACE1=313b42
+C_SURFACE2=353f46
+C_OVERLAY=414b50
+C_TEXT=D5C9AB
+C_SUBTEXT0=999483
+C_SUBTEXT1=bbb299
+C_ACCENT=DBBC7F
+C_RED=e67e80
+C_GREEN=a7c080
+C_YELLOW=dbbc7f
+C_BLUE=7fbbb3
+C_PURPLE=d699b6
+C_PINK=df69ba
+C_TEAL=83c092
+C_ORANGE=E69875
+C_T0=7a8478
+C_T1=e67e80
+C_T2=a7c080
+C_T3=dbbc7f
+C_T4=7fbbb3
+C_T5=d699b6
+C_T6=83c092
+C_T7=f2efdf
+C_TB0=a6b0a0
+C_TB1=f85552
+C_TB2=8da101
+C_TB3=dfa000
+C_TB4=3a94c5
+C_TB5=df69ba
+C_TB6=35a77c
+C_TB7=fffbef

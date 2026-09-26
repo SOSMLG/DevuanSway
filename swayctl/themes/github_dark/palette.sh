@@ -1,0 +1,37 @@
+# github_dark — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=0d1117
+C_MANTLE=0b0f14
+C_CRUST=0a0d12
+C_SURFACE0=0e1218
+C_SURFACE1=0f131a
+C_SURFACE2=10151c
+C_OVERLAY=2f363d
+C_TEXT=d0d7de
+C_SUBTEXT0=8b9198
+C_SUBTEXT1=b2b9c0
+C_ACCENT=d29922
+C_RED=f78166
+C_GREEN=56d364
+C_YELLOW=e3b341
+C_BLUE=6ca4f8
+C_PURPLE=db61a2
+C_PINK=db61a2
+C_TEAL=2b7489
+C_ORANGE=D29922
+C_T0=000000
+C_T1=f78166
+C_T2=56d364
+C_T3=e3b341
+C_T4=6ca4f8
+C_T5=db61a2
+C_T6=2b7489
+C_T7=ffffff
+C_TB0=4d4d4d
+C_TB1=f78166
+C_TB2=56d364
+C_TB3=e3b341
+C_TB4=6ca4f8
+C_TB5=db61a2
+C_TB6=2b7489
+C_TB7=ffffff

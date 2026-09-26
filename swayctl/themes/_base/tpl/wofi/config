@@ -1,0 +1,58 @@
+# wofi — launcher config (style is theme-rendered in ./style.css).
+# Look: flat (square corners) to match the border style; --dmenu feeds from
+# swayctl (clipboard, palette, menus) share this look via `wofi --dmenu`.
+
+mode=drun
+show=drun
+
+drun-display-format={name}
+drun-categories=
+drun-show-actions=false
+drun-print-command=true
+
+# ---- [colors] ---------------------------------------------------------------
+# Static values live in style.css (rendered per-theme); nothing here is themed.
+
+# ---- [layout] ---------------------------------------------------------------
+# Entirely percent-based (wofi: plain numbers are PIXELS). Anchored to the
+# bottom so the launcher rises from just above the built-in swaybar (bar
+# height 26). NOTE: never pair an offset with location=center — wofi(7)
+# then silently re-anchors the window to top_left. No `lines` here: with
+# lines>0 wofi 1.4.1 computes the scroll height before rows are measured
+# and raises Gtk-CRITICAL 'height >= -1' on every launch; height% drives
+# the size instead.
+prompt=
+filter_rate=20
+matching=fuzzy
+allow_images=true
+image_size=32
+insensitive=true
+location=bottom
+xoffset=0
+yoffset=30
+width=44%
+height=60%
+columns=1
+
+# ---- [behavior] ---------------------------------------------------------------
+exec_search=true
+parse_search=false
+return_named_entries=false
+no_actions=true
+term=foot
+terminal=foot
+default_term=foot
+
+fullscreen=false
+no_conf_default=false
+gtk_scale=1
+keys_redraw=Control-R
+keys_move_scroll=Control-L
+keys_select=Return,Shift-Return,Control-m
+orientation=vertical
+hide-scroll=false
+sort=newest
+cache_file=/dev/null
+no_cache=true
+print_combo=none
+internal=x

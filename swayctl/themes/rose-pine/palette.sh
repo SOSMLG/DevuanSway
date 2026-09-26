@@ -1,0 +1,37 @@
+# rose_pine — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=232136
+C_MANTLE=1f1d30
+C_CRUST=1c1b2c
+C_SURFACE0=25233a
+C_SURFACE1=28263e
+C_SURFACE2=2b2842
+C_OVERLAY=2a273f
+C_TEXT=e0def4
+C_SUBTEXT0=9d9bb1
+C_SUBTEXT1=c3c1d7
+C_ACCENT=f6c177
+C_RED=eb6f92
+C_GREEN=3e8fb0
+C_YELLOW=f6c177
+C_BLUE=9ccfd8
+C_PURPLE=c4a7e7
+C_PINK=c4a7e7
+C_TEAL=ea9a97
+C_ORANGE=eb6f92
+C_T0=393552
+C_T1=eb6f92
+C_T2=3e8fb0
+C_T3=f6c177
+C_T4=9ccfd8
+C_T5=c4a7e7
+C_T6=ea9a97
+C_T7=e0def4
+C_TB0=6e6a86
+C_TB1=eb6f92
+C_TB2=3e8fb0
+C_TB3=f6c177
+C_TB4=9ccfd8
+C_TB5=c4a7e7
+C_TB6=ea9a97
+C_TB7=e0def4

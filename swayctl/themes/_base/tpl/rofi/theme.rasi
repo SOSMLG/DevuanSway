@@ -1,0 +1,52 @@
+/* rofi — RENDERED by the swayctl theme engine from palette values.
+   Do not edit the live file; use `swayctl theme set <name>`.
+   Flat/square corners to match the wofi + swaync look. */
+* {
+    background-color: transparent;
+    foreground-color: #@@TEXT@@;
+    font: "JetBrainsMono Nerd Font 14";
+}
+
+window {
+    background-color: #@@BG@@;
+    border: 2px;
+    border-color: #@@SURFACE0@@;
+    width: 44%;
+    location: center;
+}
+
+mainbox {
+    margin: 12px;
+}
+
+inputbar {
+    background-color: #@@MANTLE@@;
+    border: 1px;
+    border-color: #@@SURFACE0@@;
+    padding: 6px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    foreground-color: #@@ACCENT@@;
+    padding: 0 8px 0 0;
+}
+
+entry {
+    foreground-color: #@@TEXT@@;
+}
+
+listview {
+    lines: 8;
+    margin-top: 8px;
+}
+
+element {
+    padding: 6px 8px;
+    foreground-color: #@@TEXT@@;
+}
+
+element selected {
+    background-color: #@@SURFACE1@@;
+    foreground-color: #@@PINK@@;
+}

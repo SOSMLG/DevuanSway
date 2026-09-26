@@ -1,0 +1,22 @@
+# rofi — launcher behavior. The look lives in ./theme.rasi (rendered
+# per-palette by swayctl); this file only carries mode/behavior knobs.
+# The picker itself is swappable: SWAY_LAUNCHER=rofi|wofi — see
+# swayctl/lib/common.sh (rofi preferred, wofi fallback).
+#
+# RENDERED by the swayctl theme engine — edit swayctl/themes/_base/tpl/rofi/.
+
+@theme "theme.rasi"
+
+configuration {
+    /* small mode set: drun for the app grid, run for bare commands */
+    modes: "drun,run";
+
+    /* clean one-line entries, no action menus */
+    show-icons: true;
+    drun-display-format: "{name}";
+    drun-show-actions: false;
+
+    /* fzf-style filtering mirrors wofi's fuzzy matching */
+    sorting-method: "fzf";
+    case-smart: true;
+}

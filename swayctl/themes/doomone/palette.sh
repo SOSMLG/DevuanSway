@@ -1,0 +1,37 @@
+# doomone — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=282c34
+C_MANTLE=24272e
+C_CRUST=20242a
+C_SURFACE0=2b2f38
+C_SURFACE1=2e333c
+C_SURFACE2=313640
+C_OVERLAY=3f444a
+C_TEXT=bbc2cf
+C_SUBTEXT0=878d98
+C_SUBTEXT1=a4abb7
+C_ACCENT=ecbe7b
+C_RED=ff6c6b
+C_GREEN=98be65
+C_YELLOW=ecbe7b
+C_BLUE=a9a1e1
+C_PURPLE=c678dd
+C_PINK=c678dd
+C_TEAL=51afef
+C_ORANGE=da8548
+C_T0=000000
+C_T1=ff6c6b
+C_T2=98be65
+C_T3=ecbe7b
+C_T4=a9a1e1
+C_T5=c678dd
+C_T6=51afef
+C_T7=bbc2cf
+C_TB0=595959
+C_TB1=ff6655
+C_TB2=99bb66
+C_TB3=ecbe7b
+C_TB4=a9a1e1
+C_TB5=c678dd
+C_TB6=51afef
+C_TB7=bfbfbf

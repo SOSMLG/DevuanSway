@@ -1,0 +1,37 @@
+# moonfly — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=080808
+C_MANTLE=070707
+C_CRUST=060606
+C_SURFACE0=080808
+C_SURFACE1=090909
+C_SURFACE2=090909
+C_OVERLAY=323437
+C_TEXT=b2b2b2
+C_SUBTEXT0=767676
+C_SUBTEXT1=989898
+C_ACCENT=e3c78a
+C_RED=ff5454
+C_GREEN=8cc85f
+C_YELLOW=e3c78a
+C_BLUE=80a0ff
+C_PURPLE=cf87e8
+C_PINK=ae81ff
+C_TEAL=79dac8
+C_ORANGE=ef9f76
+C_T0=323437
+C_T1=ff5454
+C_T2=8cc85f
+C_T3=e3c78a
+C_T4=80a0ff
+C_T5=cf87e8
+C_T6=79dac8
+C_T7=c6c6c6
+C_TB0=949494
+C_TB1=ff5189
+C_TB2=36c692
+C_TB3=c6c684
+C_TB4=74b2ff
+C_TB5=ae81ff
+C_TB6=85dc85
+C_TB7=e4e4e4

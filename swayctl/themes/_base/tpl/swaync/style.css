@@ -1,0 +1,111 @@
+/* sway-notification-center — RENDERED by swayctl. Do not edit; use `swayctl theme`. */
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  color: #@@TEXT@@;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+#control-center {
+  background: #@@BG@@;
+  border: 2px solid #@@SURFACE0@@;
+  border-radius: 0;
+  padding: 10px;
+}
+
+/* bar at top */
+#ctl-bar {
+  background: #@@MANTLE@@;
+  border-bottom: 1px solid #@@SURFACE0@@;
+  padding: 4px 6px;
+}
+
+#ctl-bar label {
+  color: #@@SUBTEXT0@@;
+  font-weight: bold;
+}
+
+.control-center-clear-all {
+  color: #@@CRUST@@;
+  background: #@@ACCENT@@;
+  padding: 2px 8px;
+}
+.control-center-clear-all:hover {
+  background: #@@RED@@;
+}
+
+/* dnd button */
+.dnd-button {
+  border: 1px solid #@@SURFACE0@@;
+  padding: 2px 8px;
+  color: #@@SUBTEXT0@@;
+}
+.dnd-button.dnd-active {
+  background: #@@ACCENT@@;
+  color: #@@CRUST@@;
+}
+
+/* notifications */
+.notification {
+  background: #@@MANTLE@@;
+  border: 1px solid #@@SURFACE0@@;
+  border-left: 3px solid #@@ACCENT@@;
+  padding: 8px;
+  margin: 4px 0;
+}
+.notification.critical {
+  border-left-color: #@@RED@@;
+}
+.notification.low .notification-body {
+  color: #@@SUBTEXT0@@;
+}
+
+.notification-title {
+  color: #@@TEXT@@;
+  font-weight: bold;
+}
+.notification-body {
+  color: #@@SUBTEXT1@@;
+}
+.notification-action {
+  color: #@@ACCENT@@;
+}
+
+.notification-default-action,
+.notification-action {
+  padding: 2px 6px;
+  margin: 2px;
+  background: #@@SURFACE0@@;
+}
+.notification-default-action:hover,
+.notification-action:hover {
+  background: #@@SURFACE1@@;
+  color: #@@ACCENT@@;
+}
+
+/* popup OSD (vol/brightness via swayctl) */
+#mpris {
+  background: #@@MANTLE@@;
+  border: 2px solid #@@SURFACE0@@;
+}
+#mode-normalization {
+  background: #@@SURFACE0@@;
+  border: 0;
+}
+#notification-image {
+  border-radius: 0;
+}
+
+/* scrollbar */
+scrollbar {
+  background: #@@MANTLE@@;
+}
+scrollbar slider {
+  background: #@@SURFACE1@@;
+  min-width: 6px;
+}

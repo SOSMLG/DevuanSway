@@ -1,0 +1,37 @@
+# gruvbox — ported from justaguylinux/sway-setup by SwaySetup
+# Hex values carry NO '#'; the theme engine adds the prefix where needed.
+C_BG=282828
+C_MANTLE=242424
+C_CRUST=202020
+C_SURFACE0=2b2b2b
+C_SURFACE1=2e2e2e
+C_SURFACE2=313131
+C_OVERLAY=3c3836
+C_TEXT=ebdbb2
+C_SUBTEXT0=a69c81
+C_SUBTEXT1=cdc09d
+C_ACCENT=d79921
+C_RED=cc241d
+C_GREEN=98971a
+C_YELLOW=d79921
+C_BLUE=458588
+C_PURPLE=b16286
+C_PINK=d3869b
+C_TEAL=689d6a
+C_ORANGE=cc241d
+C_T0=282828
+C_T1=cc241d
+C_T2=98971a
+C_T3=d79921
+C_T4=458588
+C_T5=b16286
+C_T6=689d6a
+C_T7=a89984
+C_TB0=928374
+C_TB1=fb4934
+C_TB2=b8bb26
+C_TB3=fabd2f
+C_TB4=83a598
+C_TB5=d3869b
+C_TB6=8ec07c
+C_TB7=ebdbb2
