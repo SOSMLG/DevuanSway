@@ -1,0 +1,153 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+    // Retro CRT monitor face: magenta frame, cyan eyes/smile, blue stand
+    "logo": {
+        "type": "data-raw",
+        "source": "  \u001b[38;5;201m╔═══════════╗\u001b[0m\n  \u001b[38;5;201m║\u001b[0m  \u001b[38;5;51m◉\u001b[0m     \u001b[38;5;51m◉\u001b[0m  \u001b[38;5;201m║\u001b[0m\n  \u001b[38;5;201m║\u001b[0m    \u001b[38;5;51m───\u001b[0m    \u001b[38;5;201m║\u001b[0m\n  \u001b[38;5;201m║\u001b[0m  \u001b[38;5;51m╰─────╯\u001b[0m  \u001b[38;5;201m║\u001b[0m\n  \u001b[38;5;201m╚═══════════╝\u001b[0m\n     \u001b[38;5;27m┴───┴\u001b[0m     \n   \u001b[38;5;201mJUST·A·GUY\u001b[0m  \n   \u001b[38;5;51mL I N U X\u001b[0m   ",
+        "width": 15,
+        "height": 8,
+        "padding": {
+            "top": 1,
+            "right": 2
+        }
+    },
+
+    "display": {
+        // Dual-chevron separator: hot-pink → cyan
+        "separator": "  \u001b[38;5;201m❯\u001b[38;5;51m❯\u001b[0m  ",
+        "color": {
+            "keys": "bright_magenta"
+        },
+        "brightColor": true
+    },
+
+    "modules": [
+        "break",
+        "break",
+
+        // ── Title ─────────────────────────────────────────────────────────
+        {
+            "type": "title",
+            "format": "\u001b[38;5;201m{user-name}\u001b[38;5;245m ⬡ \u001b[38;5;51m{host-name}\u001b[0m"
+        },
+        // Gradient divider: hot-pink → violet → cyan
+        {
+            "type": "custom",
+            "format": "\u001b[38;5;201m────\u001b[38;5;165m────\u001b[38;5;129m────\u001b[38;5;93m────\u001b[38;5;57m────\u001b[38;5;51m────\u001b[0m"
+        },
+
+        // ── System ────────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[1m\u001b[38;5;201m▶ \u001b[38;5;51mSYSTEM\u001b[0m"
+        },
+        {
+            "type": "os",
+            "key": "  {icon}  OS",
+            "keyColor": "cyan"
+        },
+        {
+            "type": "kernel",
+            "key": "  {icon}  Kernel",
+            "keyColor": "cyan"
+        },
+        {
+            "type": "uptime",
+            "key": "  {icon}  Uptime",
+            "keyColor": "cyan"
+        },
+        "break",
+
+        // ── Hardware ──────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[1m\u001b[38;5;201m▶ \u001b[38;5;39mHARDWARE\u001b[0m"
+        },
+        {
+            "type": "cpu",
+            "key": "  {icon}  CPU",
+            "keyColor": "blue",
+            "showPeCoreCount": true
+        },
+        {
+            "type": "gpu",
+            "key": "  {icon}  GPU",
+            "keyColor": "blue"
+        },
+        {
+            "type": "memory",
+            "key": "  {icon}  RAM",
+            "keyColor": "blue",
+            "percent": {
+                "type": 3,
+                "green": 40,
+                "yellow": 75
+            }
+        },
+        {
+            "type": "disk",
+            "key": "  {icon}  Disk",
+            "keyColor": "blue",
+            "format": "{size-used} / {size-total} ({size-percentage})"
+        },
+        "break",
+
+        // ── Desktop ───────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[1m\u001b[38;5;201m▶ \u001b[38;5;46mDESKTOP\u001b[0m"
+        },
+        {
+            "type": "de",
+            "key": "  {icon}  DE",
+            "keyColor": "green"
+        },
+        {
+            "type": "wm",
+            "key": "  {icon}  WM",
+            "keyColor": "green"
+        },
+        {
+            "type": "display",
+            "key": "  {icon}  Display",
+            "keyColor": "green",
+            "compactType": "original-with-refresh-rate"
+        },
+        "break",
+
+        // ── Shell / Packages ──────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[1m\u001b[38;5;201m▶ \u001b[38;5;226mSHELL\u001b[0m"
+        },
+        {
+            "type": "shell",
+            "key": "  {icon}  Shell",
+            "keyColor": "yellow"
+        },
+        {
+            "type": "terminal",
+            "key": "  {icon}  Term",
+            "keyColor": "yellow"
+        },
+        {
+            "type": "packages",
+            "key": "  {icon}  Pkgs",
+            "keyColor": "yellow"
+        },
+        "break",
+
+        // ── Footer ────────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[38;5;201m────\u001b[38;5;165m────\u001b[38;5;129m────\u001b[38;5;93m────\u001b[38;5;57m────\u001b[38;5;51m────\u001b[0m"
+        },
+        // Full 256-color rainbow strip (red → orange → yellow → green → cyan → blue → violet → magenta)
+        {
+            "type": "custom",
+            "format": " \u001b[48;5;196m  \u001b[48;5;202m  \u001b[48;5;208m  \u001b[48;5;214m  \u001b[48;5;220m  \u001b[48;5;226m  \u001b[48;5;190m  \u001b[48;5;118m  \u001b[48;5;46m  \u001b[48;5;51m  \u001b[48;5;45m  \u001b[48;5;39m  \u001b[48;5;27m  \u001b[48;5;57m  \u001b[48;5;93m  \u001b[48;5;129m  \u001b[48;5;165m  \u001b[48;5;201m  \u001b[0m"
+        },
+        "break"
+    ]
+}

@@ -1,0 +1,19 @@
+# kanshi — automatic output profiles for hotplug/dock.
+# sway execs `kanshi` at session start; these profiles apply when the listed
+# outputs appear. Profile names are arbitrary. Add your dock/HDMI/DP outputs.
+#
+# Find your outputs with `wlr-randr` (or `swaymsg -t get_outputs`).
+# On profile match the output layout/scale/mode is reconfigured live.
+
+profile laptop {
+  # ThinkPad L14 Gen 2 AMD panel: explicit mode/position/scale so a
+  # profile re-apply can never reset the scale behind sway's back.
+  output eDP-1 enable mode 1920x1080@60Hz position 0,0 scale 1 adaptive_sync off
+}
+
+# Example dock profile (adjust to your actual external outputs/positions):
+# profile docked {
+#   output eDP-1 disable
+#   output DP-2 enable mode 2560x1440@75Hz position 0,0 scale 1
+#   output HDMI-A-1 enable mode 1920x1080@60Hz position 2560,0 scale 1
+# }

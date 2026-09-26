@@ -1,0 +1,390 @@
+# Sway configuration — sway-setup
+# Reload after editing: $mod+Shift+C
+
+### Variables
+set $mod Mod4
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Core apps — TUI-first: foot terminal, Thunar + Firefox as the only GUI anchors
+set $term foot
+set $menu swayctl menu
+set $file thunar
+set $browser firefox
+
+# Workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Theme palette (rendered by `swayctl theme`)
+include colors.conf
+
+### Appearance
+title_align center
+font pango:JetBrainsMono Nerd Font Bold 10
+
+# Borders — thin pixel borders
+for_window [app_id="^.*"] border pixel 3
+
+# Gaps — tight, productivity-focused
+gaps inner 5
+gaps outer 0
+
+# Window colors (from colors.conf)
+#                  border     background text      indicator  child_border
+client.focused          $accent  $mantle    $text    $accent    $accent
+client.focused_inactive $surface $mantle    $subtext $surface   $surface
+client.unfocused        $surface $crust     $subtext $surface   $surface
+client.urgent           $red     $crust     $text    $red       $red
+client.placeholder      $crust   $crust     $text     $surface    $surface
+client.background       $crust
+
+# Misc look & feel
+workspace_layout default
+mouse_warping none
+focus_follows_mouse no
+focus_wrapping no
+seat * hide_cursor 10000
+
+# Disable titlebar mouse scroll
+bindsym button4 nop
+bindsym button5 nop
+
+### Autostart
+exec swaync
+# Volume/brightness OSD is a swayctl notification popup (pactl + swaync).
+# Policykit agent — lxqt-policykit (lightweight, no GTK dialogs).
+exec sh -c 'command -v lxqt-policykit-agent >/dev/null 2>&1 && exec lxqt-policykit-agent'
+# Thunar volume monitor (automount + MTP/phones). Guarded: no-op if missing.
+# NOTE: `pgrep -x` (exact name), never `pgrep -f "thunar --daemon"` — the
+# pattern would also match this very `sh -c` wrapper, making the guard
+# permanently true so the daemon silently never starts.
+exec sh -c 'command -v thunar >/dev/null 2>&1 && (pgrep -x thunar >/dev/null 2>&1 || exec thunar --daemon >/dev/null 2>&1)'
+# Audio daemons (pipewire + pulse compatibility)
+exec sh -c 'command -v pipewire >/dev/null 2>&1 && pipewire >/dev/null 2>&1'
+exec sh -c 'command -v wireplumber >/dev/null 2>&1 && sleep 0.4 && wireplumber >/dev/null 2>&1'
+exec sh -c 'command -v pipewire-pulse >/dev/null 2>&1 && sleep 0.6 && pipewire-pulse >/dev/null 2>&1'
+exec sh -c 'command -v swayctl >/dev/null 2>&1 && swayctl clip watch'
+# Battery & temperature warnings — exactly one instance each, via flock
+# (lock files in ~/.cache, released automatically on exit). NOTE: do NOT
+# "simplify" this into a pgrep -f guard: any such pattern also matches the
+# very `sh -c` wrapper running the check (it contains the script path), so
+# the guard is permanently true and the monitors silently never start.
+exec sh -c 'mkdir -p ~/.cache && exec flock -n ~/.cache/swayctl-batteryWarning.lock ~/.config/sway/scripts/batteryWarning.sh'
+exec sh -c 'mkdir -p ~/.cache && exec flock -n ~/.cache/swayctl-tempWarning.lock ~/.config/sway/scripts/tempWarning.sh'
+# Display management (kanshi)
+exec kanshi
+
+# Status bar: sway's built-in swaybar — no separate bar daemon. It is
+# drawn by sway itself and themed by the same 12-palette engine via
+# colors.conf tokens ($bg/$text/$accent/...). `swayctl bar restart`
+# re-applies it. Optional tray icons (e.g. Blueman) land here too.
+bar bar-0 {
+    mode dock
+    position bottom
+    status_command ~/.config/swaybar/status.sh
+    font pango:JetBrainsMono Nerd Font 9
+    height 26
+    tray_output *
+    separator_symbol " "
+    status_padding 2
+    tray_padding 3
+    colors {
+        background $bg
+        statusline $text
+        separator $surface2
+        focused_workspace  $accent $surface $crust
+        active_workspace   $surface $surface $text
+        inactive_workspace $surface $crust $subtext
+        urgent_workspace   $red $red $crust
+    }
+}
+# Restore persisted wallpaper (swayctl bg set > marker); falls back to the
+# `output * bg` line below when no marker exists yet.
+exec swayctl bg apply
+# Idle management
+exec swayidle -w \
+     timeout 300 'command -v swayctl >/dev/null 2>&1 && swayctl lock || swaylock -f' \
+     timeout 600 'swaymsg "output * dpms off"' \
+     resume 'swaymsg "output * dpms on"' \
+     lock 'command -v swayctl >/dev/null 2>&1 && swayctl lock || swaylock -f' \
+     before-sleep 'command -v swayctl >/dev/null 2>&1 && swayctl lock || swaylock -f' \
+     after-resume 'command -v swayctl >/dev/null 2>&1 && swayctl kill q; swaymsg reload'
+
+### Output configuration
+# Managed by `swayctl bg set` — _bg_apply rewrites this line AND the
+# ~/.local/state/swayctl/bg marker, so `reload` no longer reverts wallpaper.
+# Use `swayctl bg set <file>` instead of hand-editing.
+output * bg ${HOME}/.config/sway/wallpapers/catppuccin-mocha.png fill
+
+### Input configuration
+input type:touchpad {
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    dwt enabled
+    accel_profile adaptive
+}
+
+input type:pointer {
+    accel_profile adaptive
+    pointer_accel 0.3
+}
+
+# Thai keyboard with Alt+Shift toggle (us primary, th secondary)
+input type:keyboard {
+    xkb_layout us,th
+    xkb_options grp:alt_shift_toggle
+}
+
+# Touchpad gestures
+bindgesture swipe:right focus next
+bindgesture swipe:left focus prev
+bindgesture swipe:up workspace prev
+bindgesture swipe:down workspace next
+
+### Workspace assignments
+# Note: rules for apps not installed by the toolkit (Brave, LibreWolf,
+# Inkscape, LibreOffice, Kdenlive, OBS, Lutris) are included so they
+# land on sensible workspaces if the user installs them later.
+assign [app_id="(?i).*foot.*"]                  $ws1
+assign [app_id="(?i).*firefox.*"]             $ws2
+assign [app_id="(?i).*firefox-esr.*"]         $ws2
+assign [app_id="(?i).*brave.*"]               $ws2
+assign [class="(?i).*brave.*"]                $ws2
+assign [app_id="(?i).*librewolf.*"]           $ws2
+assign [app_id="(?i).*code.*"]                $ws3
+assign [app_id="(?i).*codium.*"]              $ws3
+assign [app_id="(?i).*thunar.*"]              $ws4
+assign [app_id="(?i).*mpv.*"]                $ws8
+assign [app_id="(?i).*vesktop.*"]             $ws5
+assign [class="(?i).*discord.*"]              $ws5
+assign [app_id="(?i).*telegram.*"]            $ws5
+assign [app_id="(?i).*gimp.*"]                $ws6
+assign [app_id="(?i).*inkscape.*"]            $ws6
+assign [app_id="(?i).*libreoffice.*"]         $ws7
+assign [app_id="(?i).*zathura.*"]             $ws7
+assign [app_id="(?i).*kdenlive.*"]            $ws8
+assign [app_id="(?i).*obsproject.*"]          $ws8
+assign [app_id="(?i).*steam.*"]               $ws9
+assign [class="(?i).*steam.*"]                $ws9
+assign [app_id="(?i).*heroic.*"]              $ws9
+assign [app_id="(?i).*lutris.*"]              $ws9
+
+### Window rules
+for_window {
+    # All floating windows centered automatically
+    [floating] move position center; sticky disable
+
+    # Dialogs and popups
+    [window_type="dialog"]    floating enable; move position center
+    [window_type="utility"]   floating enable; move position center
+    [window_type="popup_menu"] floating enable; move position center
+
+    # System apps
+    [app_id="(?i).*pavucontrol.*"]       floating enable; move position center; resize set 70ppt 75ppt
+    [app_id="(?i).*blueman-manager.*"]   floating enable; move position center; resize set 70ppt 75ppt
+    [app_id="(?i).*nm-connection-editor.*"] floating enable; move position center
+
+    # Mango parity: things mangowc floated that sway didn't yet
+    [app_id="(?i).*mpv.*"]               floating enable; move position center
+    [app_id="(?i).*eog.*"]               floating enable; move position center
+    [app_id="(?i).*galculator.*"]        floating enable; move position center
+    [app_id="(?i).*transmission-gtk.*"]  floating enable; move position center
+    [app_id="(?i).*thunar.*" title="^(File Operation Progress|Confirm|Properties|Rename|Create|Error|Question|Warning).*"] floating enable; move position center
+    [app_id="(?i).*wdisplays.*"]         floating enable; move position center
+    [app_id="(?i).*nwg-look.*"]          floating enable; move position center
+
+    # File dialogs
+    [title="^(Open File|Open Folder|Save File|Print|Properties|Preferences|Settings|Rename)$"] floating enable; move position center
+    [app_id="(?i).*xdg-desktop-portal-gtk.*"] floating enable; move position center; resize set 70ppt 75ppt
+
+    # GIMP — floating dialogs, tiled canvas
+    [app_id="(?i).*gimp.*" title="(?i).*open.*"]     floating enable; move position center; resize set 70ppt 75ppt
+    [app_id="(?i).*gimp.*" title="(?i).*gnu image.*"] floating disable
+
+    # Inkscape
+    [app_id="(?i).*inkscape.*" title="(?i).*select file.*"] floating enable; move position center; resize set 70ppt 75ppt
+    [app_id="(?i).*inkscape.*" title="(?i).*new document.*"] floating disable
+
+    # LibreOffice
+    [app_id="(?i).*soffice.*" title="(?i).*open.*"] floating enable; move position center; resize set 70ppt 75ppt
+}
+
+### Key bindings
+    # ── Terminal / launcher ──────────────────────────────────
+    bindsym $mod+Return exec $term
+    bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec swayctl run
+
+    # ── Core apps (dwm/mango key slots, sway's app set) ──────
+    bindsym $mod+q kill
+    bindsym $mod+Shift+q kill
+    bindsym $mod+t exec $term
+    bindsym $mod+Shift+t exec $term -e yazi
+    bindsym $mod+f exec $file
+    bindsym $mod+e exec codium
+    bindsym $mod+z exec $browser
+
+    # ── Coding agent (OpenCode via swayctl) ──────────────────
+    bindsym $mod+a exec $term -e swayctl agent
+
+    # ── Power / lock ─────────────────────────────────────────
+    bindsym $mod+Ctrl+p exec swayctl power
+    bindsym $mod+Escape exec swayctl power
+    bindsym $mod+x exec swayctl lock
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # ── Clipboard history ────────────────────────────────────
+    bindsym $mod+v exec swayctl clip pick
+
+    # ── Keybinding cheat-sheet (parsed live from this file) ────
+    bindsym $mod+slash exec swayctl keys
+
+    # ── Screenshots (via swayctl so files are saved + copied + notified) ──
+    bindsym Print exec swayctl shot full
+    bindsym $mod+Print exec swayctl shot area
+    bindsym $mod+Ctrl+Print exec swayctl shot record
+
+    # Panic escape: nuke a stuck screenshot menu/selector/editor that
+    # ignores input. --locked so it works the moment the screen is back.
+    bindsym --locked $mod+Ctrl+Escape exec swayctl kill
+
+    # ── Volume / brightness (via swayctl so the swayosd OSD shows) ───
+    bindsym --locked XF86AudioMute exec swayctl sound mute
+    bindsym --locked XF86AudioLowerVolume exec swayctl sound down
+    bindsym --locked XF86AudioRaiseVolume exec swayctl sound up
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+    # ── Media keys ───────────────────────────────────────────
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioNext exec playerctl next
+    bindsym --locked XF86AudioPrev exec playerctl previous
+
+    # ── Window operations ────────────────────────────────────
+    bindsym $mod+m fullscreen toggle
+    bindsym $mod+Shift+o layout toggle tabbed splitv splith
+    bindsym $mod+b splith
+    bindsym $mod+Shift+v splitv
+    bindsym $mod+space floating toggle; [floating con_id="__focused__"] move position center; [floating con_id="__focused__"] resize set 70ppt 75ppt
+    bindsym $mod+Shift+space [floating con_id="__focused__"] move position center; [floating con_id="__focused__"] resize set 70ppt 75ppt
+    bindsym $mod+Shift+y [floating con_id="__focused__"] move position center
+    bindsym $mod+Shift+f focus mode_toggle
+    bindsym $mod+n focus mode_toggle
+
+    # ── Focus navigation (vim) ──────────────────────────────
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+    # ── Focus parent / child ─────────────────────────────────
+    bindsym $mod+u focus parent
+    bindsym $mod+i focus child
+
+    # ── Cycle between workspaces on output ───────────────────
+    bindsym $mod+Tab workspace next_on_output
+    bindsym Alt+Tab workspace prev_on_output
+
+    # ── Cycle between fullscreened windows ───────────────────
+    bindsym $mod+Shift+n fullscreen toggle; focus next; fullscreen toggle
+    bindsym $mod+Shift+p fullscreen toggle; focus prev; fullscreen toggle
+
+    # ── Scratchpad ───────────────────────────────────────────
+    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+minus scratchpad show
+
+    # ── Reload ───────────────────────────────────────────────
+    bindsym $mod+Shift+c reload
+
+    # ── MangoWC/dwm muscle-memory (ported from ~/.config/mango/config.conf;
+    # sway apps + sway-native commands, only on keys that were free) ──
+    bindsym $mod+p exec swayctl launcher      # mango Super+p app launcher (rofi drun)
+    # dwm/mango lock (sway keeps $mod+x too). $mod+Shift+l wins here — its
+    # `move right` twin from the hjkl row is covered by Shift+Right, so the
+    # overwrite (and its "Overwriting binding" log line) is gone.
+    bindsym $mod+Shift+l exec swayctl lock
+    # Drop-down terminal (mango Super+grave): scripts/scratch.sh spawns
+    # foot-scratch once, then shows/hides it. A script (not a criteria
+    # binding) so a press with no scratch window can't fail with
+    # "No matching node." the way the old `[app_id] scratchpad show` did.
+    bindsym $mod+grave exec ~/.config/sway/scripts/scratch.sh
+    bindsym $mod+Ctrl+b bar mode toggle       # mango bar toggle; $mod+b stays split
+    bindsym $mod+Ctrl+f exec $browser --private-window
+    bindsym $mod+Ctrl+d exec vesktop
+    bindsym $mod+Ctrl+h exec heroic
+    bindsym $mod+Ctrl+g exec gimp
+    bindsym $mod+Ctrl+o exec obs
+    bindsym $mod+comma focus output left
+    bindsym $mod+period focus output right
+    bindsym $mod+Shift+comma move container to output left
+    bindsym $mod+Shift+period move container to output right
+    bindsym $mod+F10 exec swayctl sound mute
+    bindsym $mod+F11 exec swayctl sound down
+    bindsym $mod+F12 exec swayctl sound up
+    for_window [app_id="foot-scratch"] move scratchpad
+
+# Resize mode
+mode "resize" {
+    bindsym $left resize grow   width  20 px or 5 ppt
+    bindsym $down resize shrink height 20 px or 5 ppt
+    bindsym $up resize grow   height 20 px or 5 ppt
+    bindsym $right resize shrink width  20 px or 5 ppt
+    bindsym Left resize grow   width  20 px or 5 ppt
+    bindsym Down resize shrink height 20 px or 5 ppt
+    bindsym Up resize grow   height 20 px or 5 ppt
+    bindsym Right resize shrink width  20 px or 5 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+alt+r mode "resize"
+
+# Workspace switching
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10

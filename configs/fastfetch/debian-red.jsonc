@@ -1,0 +1,143 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+    // Debian swirl logo — red/black, no text version
+    "logo": {
+        "type": "auto",
+        "source": "~/.config/fastfetch/debian_swirl.png",
+        "width": 28,
+        "height": 14,
+        "padding": {
+            "top": 3,
+            "right": 4
+        }
+    },
+
+    "display": {
+        "separator": "   ",
+        "color": {
+            "keys": "white"
+        },
+        "key": {
+            "width": 18  // wide enough for 2-cell Nerd Font icon + label
+        },
+        "brightColor": false
+    },
+
+    "modules": [
+        "break",  // prevent first line bleeding into terminal prompt
+        "break",  // extra breathing room at top
+
+        // ── Identity header ────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[1m\u001b[38;5;160mD E B I A N  G N U / L I N U X\u001b[0m"
+        },
+        "break",
+
+        // ── System ─────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[38;5;160m── \u001b[1m\u001b[38;5;231mSYSTEM\u001b[0m \u001b[38;5;160m──────────────────────────\u001b[0m"
+        },
+        {
+            "type": "os",
+            "key": "  {icon}  OS"
+        },
+        {
+            "type": "kernel",
+            "key": "  {icon}  Kernel"
+        },
+        {
+            "type": "uptime",
+            "key": "  {icon}  Uptime"
+        },
+        {
+            "type": "packages",
+            "key": "  {icon}  Packages"
+        },
+        {
+            "type": "disk",
+            "key": "  {icon}  OS Age",
+            "folders": "/",
+            "format": "installed {create-time:10}  ({days} days ago)"
+        },
+        "break",
+
+        // ── Hardware ───────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[38;5;160m── \u001b[1m\u001b[38;5;231mHARDWARE\u001b[0m \u001b[38;5;160m────────────────────────\u001b[0m"
+        },
+        {
+            "type": "host",
+            "key": "  {icon}  Machine",
+            "format": "{name}"
+        },
+        {
+            "type": "cpu",
+            "key": "  {icon}  CPU",
+            "showPeCoreCount": true
+        },
+        {
+            "type": "gpu",
+            "key": "  {icon}  GPU"
+        },
+        {
+            "type": "memory",
+            "key": "  {icon}  RAM",
+            "percent": {
+                "type": 3,
+                "green": 40,
+                "yellow": 75
+            }
+        },
+        {
+            "type": "disk",
+            "key": "  {icon}  Disk",
+            "format": "{size-used} / {size-total} ({size-percentage})"
+        },
+        "break",
+
+        // ── Desktop ────────────────────────────────────────────────────
+        {
+            "type": "custom",
+            "format": "\u001b[38;5;160m── \u001b[1m\u001b[38;5;231mDESKTOP\u001b[0m \u001b[38;5;160m─────────────────────────\u001b[0m"
+        },
+        {
+            "type": "wm",
+            "key": "  {icon}  WM"
+        },
+        {
+            "type": "display",
+            "key": "  {icon}  Display",
+            "compactType": "original-with-refresh-rate"
+        },
+        {
+            "type": "shell",
+            "key": "  {icon}  Shell"
+        },
+        {
+            "type": "terminal",
+            "key": "  {icon}  Terminal"
+        },
+        {
+            "type": "editor",
+            "key": "  {icon}  Editor"
+        },
+        "break",
+
+        // ── Footer ────────────────────────────────────────────────────
+        {
+            "type": "title",
+            "format": "\u001b[38;5;240m{user-name}@{host-name}\u001b[0m"
+        },
+        "break",
+        {
+            // black → dark red → red → bright red → pink → white
+            "type": "custom",
+            "format": " \u001b[48;5;232m  \u001b[48;5;52m  \u001b[48;5;88m  \u001b[48;5;124m  \u001b[48;5;160m  \u001b[48;5;196m  \u001b[48;5;197m  \u001b[48;5;198m  \u001b[48;5;204m  \u001b[48;5;210m  \u001b[48;5;224m  \u001b[48;5;231m  \u001b[0m"
+        },
+        "break"
+    ]
+}

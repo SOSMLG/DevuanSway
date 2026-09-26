@@ -1,0 +1,5 @@
+{"label": "lock", "action": "swayctl lock", "text": "Lock", "keybind": "l"}
+{"label": "logout", "action": "swaymsg exit", "text": "Logout", "keybind": "e"}
+{"label": "reboot", "action": "command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ] && systemctl reboot || { command -v loginctl >/dev/null 2>&1 && loginctl reboot || { doas -n reboot 2>/dev/null || sudo -n reboot; }; }", "text": "Reboot", "keybind": "r"}
+{"label": "suspend", "action": "swayctl lock & sleep 1; command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ] && systemctl suspend || { command -v loginctl >/dev/null 2>&1 && loginctl suspend || notify-send -u critical 'swayctl' 'No suspend method available'; }", "text": "Suspend", "keybind": "s"}
+{"label": "power", "action": "command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ] && systemctl poweroff || { command -v loginctl >/dev/null 2>&1 && loginctl poweroff || { doas -n shutdown -h now 2>/dev/null || sudo -n shutdown -h now; }; }", "text": "Shutdown", "keybind": "p"}
