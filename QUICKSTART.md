@@ -1,4 +1,4 @@
-# QUICKSTART — sway-setup (catppuccin-mocha)
+# QUICKSTART — sway-setup (graphite-amber)
 
 You just installed the base system and logged into a SwaySetup session. Here's
 the short version of how to live here.

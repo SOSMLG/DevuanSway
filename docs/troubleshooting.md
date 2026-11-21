@@ -21,7 +21,7 @@ wrapper `dbus-run-session -- sway` never ran.
 - `pgrep -x swaync` — if dead, `swaync &` once to see its stderr.
 - Config path: swaync runs with `-c ~/.config/sway/swaync/config.json -s
   ~/.config/sway/swaync/style.css`; missing files mean the theme engine
-  hasn't rendered yet (`swayctl theme set catppuccin-mocha`).
+  hasn't rendered yet (`swayctl theme set graphite-amber`).
 
 ## Theme doesn't re-render
 

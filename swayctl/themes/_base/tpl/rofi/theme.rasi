@@ -48,5 +48,5 @@ element {
 
 element selected {
     background-color: #@@SURFACE1@@;
-    foreground-color: #@@PINK@@;
+    foreground-color: #@@ACCENT@@;
 }

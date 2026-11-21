@@ -3,7 +3,7 @@
 This machine was set up with `sway-setup` (formerly DebianSway), a
 post-install toolkit for a ThinkPad-class laptop running Devuan 6 (excalibur)
 — binary-compatible with Debian 13 (Trixie) — running a lean **Sway** Wayland
-desktop on a dark **catppuccin-mocha** rice. Keep the following in mind when
+desktop on a dark **graphite-amber** rice. Keep the following in mind when
 suggesting commands or diagnosing issues on this system.
 
 ## Package management
@@ -52,7 +52,7 @@ suggesting commands or diagnosing issues on this system.
     (`swayctl power`), idle is swayidle. Policykit agent: `lxqt-policykit-agent`.
 
 ## Theming & the tree
-- The rice is the **catppuccin-mocha** palette by default, one of **12**
+- The rice is the **graphite-amber** palette by default, one of **12**
   installed palettes (doomone, dracula, everforest, github_dark, gruvbox,
   kanagawa, monokai, moonfly, nord, retro, rose-pine). Switch with
   `swayctl theme set <name>` — renders sway/colors.conf, foot, swaync,

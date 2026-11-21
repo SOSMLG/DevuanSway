@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================
-# sway-setup — Devuan 6 (Excalibur) + Sway — Ordered Runner
+# sway-setup -- Devuan 6 (Excalibur) + Sway -- Ordered Runner
 # Discovers steps from scripts/??-*.sh (sorted = run order), grouped
 # into phases by leading digit: 1x core, 2x desktop, 3x engineering,
 # 4x apps, 5x utils. Each step declares its own metadata:
@@ -111,7 +111,7 @@ fi
 if [ -f /etc/debian_version ]; then
     echo -e "${GREEN}Debian-based system detected: $(cat /etc/debian_version)${RESET}"
     if [ -f /etc/devuan_version ]; then
-        echo -e "${GREEN}Devuan detected: $(cat /etc/devuan_version) — OpenRC service handling active.${RESET}"
+        echo -e "${GREEN}Devuan detected: $(cat /etc/devuan_version) -- OpenRC service handling active.${RESET}"
     fi
 else
     echo -e "${YELLOW}Warning: this toolkit targets Devuan/Debian. Your system may not be compatible.${RESET}"
@@ -135,14 +135,14 @@ phase_of() {
     esac
 }
 
-step_desc() {  # step_desc <file> — SWAY_DESC header (DEBSWAY_DESC legacy fallback)
+step_desc() {  # step_desc <file> -- SWAY_DESC header (DEBSWAY_DESC legacy fallback)
     local d
     d="$(grep -m1 '^# SWAY_DESC:\|^# DEBSWAY_DESC:' "$1" 2>/dev/null \
         | sed -e 's/^# SWAY_DESC: *//' -e 's/^# DEBSWAY_DESC: *//')"
     printf '%s' "${d:-No description (add a SWAY_DESC header)}"
 }
 
-step_default() {  # step_default <file> — SWAY_DEFAULT header (DEBSWAY_DEFAULT legacy fallback)
+step_default() {  # step_default <file> -- SWAY_DEFAULT header (DEBSWAY_DEFAULT legacy fallback)
     local d
     d="$(grep -m1 '^# SWAY_DEFAULT:\|^# DEBSWAY_DEFAULT:' "$1" 2>/dev/null \
         | sed -e 's/^# SWAY_DEFAULT: *//' -e 's/^# DEBSWAY_DEFAULT: *//' | tr -d '[:space:]')"
@@ -160,7 +160,7 @@ declare -A RENAMED=(
     [terminalButterbash]=18-butterbash.sh [fastfetchConfig]=19-fastfetch.sh
     [20-shell-upgrade]=20-shell-tools.sh [25-swayShellUpgrade]=20-shell-tools.sh
     [21-debsway-cli]=21-swayctl-cli.sh [26-debswayCli]=21-swayctl-cli.sh
-    [catppuccinSway]=22-theme-default.sh [shellUpgrade]=20-shell-tools.sh
+    [graphiteAmberSway]=22-theme-default.sh [shellUpgrade]=20-shell-tools.sh
     [30-desktop-essentials]=40-desktop-apps.sh [desktopEssentials]=40-desktop-apps.sh
     [31-timeshift]=41-timeshift.sh [timeshiftSetup]=41-timeshift.sh
     [32-time-sync]=40-desktop-apps.sh [networkTimeSync]=40-desktop-apps.sh
@@ -196,7 +196,7 @@ resolve_step() {  # resolve_step <token> -> filename
     done
     # Pre-rename alias.
     if [ -n "${RENAMED[$tok]+x}" ]; then
-        echo -e "${YELLOW}Note: '$tok' was renamed to '${RENAMED[$tok]}' — update your notes.${RESET}" >&2
+        echo -e "${YELLOW}Note: '$tok' was renamed to '${RENAMED[$tok]}' -- update your notes.${RESET}" >&2
         printf '%s\n' "${RENAMED[$tok]}"
         return 0
     fi
@@ -214,7 +214,7 @@ shopt -u nullglob
 unset _f _b
 
 if [ "${#STEPS[@]}" -eq 0 ]; then
-    echo -e "${RED}No steps found in $SCRIPTS_DIR/??-*.sh — broken checkout?${RESET}"
+    echo -e "${RED}No steps found in $SCRIPTS_DIR/??-*.sh -- broken checkout?${RESET}"
     exit 1
 fi
 
@@ -231,7 +231,7 @@ if [ "$DO_LIST" -eq 1 ]; then
         DESC="${REST%%|*}"
         DEFAULT="${REST##*|}"
         if [ "$PHASE" != "$_last_phase" ]; then
-            echo -e "${CYAN}── $PHASE ──${RESET}"
+            echo -e "${CYAN}-- $PHASE --${RESET}"
             _last_phase="$PHASE"
         fi
         printf '  %2d.  %-28s default: %-1s  %s\n' "$i" "$SCRIPT" "$DEFAULT" "$DESC"
@@ -255,14 +255,14 @@ if [ "${#ONLY_NAMES[@]}" -gt 0 ] || [ "${#PHASE_NAMES[@]}" -gt 0 ]; then
         if _r="$(resolve_step "$n")"; then
             WANT_STEPS["$_r"]=1
         else
-            echo -e "${YELLOW}⚠ Not a toolkit step, ignoring: $n${RESET}"
+            echo -e "${YELLOW}! Not a toolkit step, ignoring: $n${RESET}"
         fi
     done
     for p in "${PHASE_NAMES[@]:-}"; do
         [ -z "$p" ] && continue
         case "$p" in
             core|desktop|engineering|apps|utils|misc) WANT_PHASES["$p"]=1 ;;
-            *) echo -e "${YELLOW}⚠ Unknown phase, ignoring: $p (core|desktop|engineering|apps|utils)${RESET}" ;;
+            *) echo -e "${YELLOW}! Unknown phase, ignoring: $p (core|desktop|engineering|apps|utils)${RESET}" ;;
         esac
     done
     unset n p
@@ -288,7 +288,7 @@ else
 fi
 
 echo -e "${BLUE}=========================================================${RESET}"
-echo -e "${BLUE}   sway-setup — Devuan 6 (Excalibur) + Sway${RESET}"
+echo -e "${BLUE}   sway-setup -- Devuan 6 (Excalibur) + Sway${RESET}"
 echo -e "${BLUE}=========================================================${RESET}\n"
 
 # --- One apt refresh, then let the scripts skip their own ------------------
@@ -306,12 +306,12 @@ priv() {
 # expires mid-run. Both escalators are refreshed: the box may start on
 # sudo and gain doas halfway through (10-sway-core.sh installs opendoas
 # and writes the persist rule), while priv() prefers doas whenever present.
-echo -e "${CYAN}[*] Caching privilege — one password prompt for the whole run...${RESET}"
+echo -e "${CYAN}[*] Caching privilege -- one password prompt for the whole run...${RESET}"
 if ! priv true; then
     if command -v sudo >/dev/null 2>&1 && sudo -v; then
-        echo -e "${YELLOW}[!] doas not usable yet — continuing on sudo; 12-user-groups.sh sets up doas persist mid-run.${RESET}"
+        echo -e "${YELLOW}[!] doas not usable yet -- continuing on sudo; 12-user-groups.sh sets up doas persist mid-run.${RESET}"
     else
-        echo -e "${RED}Privilege escalation failed — fix doas/sudo setup, then re-run.${RESET}"
+        echo -e "${RED}Privilege escalation failed -- fix doas/sudo setup, then re-run.${RESET}"
         exit 1
     fi
 fi
@@ -334,7 +334,7 @@ export SWAY_SKIP_APT_UPDATE=1
 if [ "$SKIP_APT_UPDATE" -eq 0 ]; then
     echo -e "${CYAN}[*] Refreshing package lists once (scripts skip their own refreshes)...${RESET}"
     if ! priv apt-get update; then
-        echo -e "${YELLOW}[!] apt-get update failed — continuing anyway. Some installs may fail if lists are stale.${RESET}"
+        echo -e "${YELLOW}[!] apt-get update failed -- continuing anyway. Some installs may fail if lists are stale.${RESET}"
     fi
 fi
 
@@ -358,11 +358,11 @@ for ENTRY in "${SELECTED[@]}"; do
     DEFAULT="${REST##*|}"
     SCRIPT_PATH="$SCRIPTS_DIR/$SCRIPT"
 
-    echo -e "${YELLOW}▶ [$PHASE] ${SCRIPT}${RESET}"
+    echo -e "${YELLOW}> [$PHASE] ${SCRIPT}${RESET}"
     echo -e "   ${CYAN}${DESC}${RESET}"
 
     if [ ! -f "$SCRIPT_PATH" ]; then
-        echo -e "${RED}   ❌ Script not found: $SCRIPT_PATH${RESET}\n"
+        echo -e "${RED}   [FAIL] Script not found: $SCRIPT_PATH${RESET}\n"
         FAILED+=("$SCRIPT (missing)")
         record_run "$SCRIPT  missing"
         continue
@@ -372,12 +372,12 @@ for ENTRY in "${SELECTED[@]}"; do
         DEFAULT="Y"
     fi
     DEFAULT=${DEFAULT^^}
-    PROMPT="   ➤ Run this script? (y/N): "
-    [ "$DEFAULT" = "Y" ] && PROMPT="   ➤ Run this script? (Y/n): "
+    PROMPT="   > Run this script? (y/N): "
+    [ "$DEFAULT" = "Y" ] && PROMPT="   > Run this script? (Y/n): "
 
     if [ -n "${SWAY_ASSUME_YES:-}" ]; then
         ANSWER="$DEFAULT"
-        echo -e "${CYAN}   (unattended) → ${ANSWER}${RESET}"
+        echo -e "${CYAN}   (unattended) -> ${ANSWER}${RESET}"
     else
         read -rp "$PROMPT" ANSWER
         ANSWER=${ANSWER:-$DEFAULT}
@@ -386,18 +386,18 @@ for ENTRY in "${SELECTED[@]}"; do
 
     case "${ANSWER^^}" in
         Y)
-            echo -e "${GREEN}   ✅ Running $SCRIPT...${RESET}"
+            echo -e "${GREEN}   [OK] Running $SCRIPT...${RESET}"
             if bash "$SCRIPT_PATH"; then
-                echo -e "${GREEN}   ✅ Done: $SCRIPT${RESET}\n"
+                echo -e "${GREEN}   [OK] Done: $SCRIPT${RESET}\n"
                 record_run "$SCRIPT  ok"
             else
-                echo -e "${RED}   ❌ $SCRIPT exited with an error (continuing with the rest)${RESET}\n"
+                echo -e "${RED}   [FAIL] $SCRIPT exited with an error (continuing with the rest)${RESET}\n"
                 FAILED+=("$SCRIPT")
                 record_run "$SCRIPT  failed"
             fi
             ;;
         *)
-            echo -e "${YELLOW}   ⚠ Skipped: $SCRIPT${RESET}\n"
+            echo -e "${YELLOW}   ! Skipped: $SCRIPT${RESET}\n"
             SKIPPED+=("$SCRIPT")
             record_run "$SCRIPT  skipped"
             ;;
@@ -409,7 +409,7 @@ if [ "$DO_VERIFY" -eq 1 ]; then
     VERIFY_PATH="$SCRIPT_DIR/verify.sh"
     if [ -f "$VERIFY_PATH" ]; then
         echo -e "${BLUE}=========================================================${RESET}"
-        echo -e "${BLUE}   🔍 Verifying setup...${RESET}"
+        echo -e "${BLUE}   [search] Verifying setup...${RESET}"
         echo -e "${BLUE}=========================================================${RESET}\n"
         if bash "$VERIFY_PATH"; then
             record_run "verify  ok"
@@ -417,12 +417,12 @@ if [ "$DO_VERIFY" -eq 1 ]; then
             record_run "verify  issues"
         fi
     else
-        echo -e "${YELLOW}⚠ verify.sh not found — skipping --verify.${RESET}"
+        echo -e "${YELLOW}! verify.sh not found -- skipping --verify.${RESET}"
     fi
 fi
 
 echo -e "${BLUE}=========================================================${RESET}"
-echo -e "${BLUE}   🏁 All tasks processed.${RESET}"
+echo -e "${BLUE}   [done] All tasks processed.${RESET}"
 echo -e "${BLUE}=========================================================${RESET}"
 
 if [ "${#SKIPPED[@]}" -gt 0 ]; then

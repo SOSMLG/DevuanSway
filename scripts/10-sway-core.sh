@@ -2,14 +2,14 @@
 # SWAY_DESC: Sway stack + swaync + foot + wofi/rofi + thunar + LightDM sway session + fonts
 # SWAY_DEFAULT: Y
 # =======================================================
-# 10-sway-core.sh — the lean-but-functional Sway desktop
+# 10-sway-core.sh -- the lean-but-functional Sway desktop
 # -------------------------------------------------------
 # Installs the Sway window manager and every piece of the
-# "small footprint" shell around it — one bar, one notifier,
+# "small footprint" shell around it -- one bar, one notifier,
 # one launcher, one terminal:
 #
 #   sway/swaybg/swayidle/swaylock  WM + wallpaper + idle + lock
-#   swaybar status.sh              the bar — built into sway, themed by the engine
+#   swaybar status.sh              the bar -- built into sway, themed by the engine
 #                                 (no separate bar daemon; 'swayctl bar restart' reloads)
 #   sway-notification-center        notifications (swaync)
 #   foot                            terminal (only pinned terminal)
@@ -71,29 +71,29 @@ if [ -d "$CONFIGS_SRC" ]; then
         dst="$HOME/.config/$app"
         if [ -d "$dst" ] && [ "$(ls -A "$dst" 2>/dev/null | wc -l)" -gt 0 ]; then
             cp -a "$dst" "$dst.bak.$TS" 2>/dev/null || true
-            log_info "Backed up ~/.config/$app → ~/.config/$app.bak.$TS"
+            log_info "Backed up ~/.config/$app -> ~/.config/$app.bak.$TS"
         fi
         mkdir -p "$dst"
         cp -a "$app_dir/." "$dst/"
-        log_ok "Deployed configs/$app → ~/.config/$app"
+        log_ok "Deployed configs/$app -> ~/.config/$app"
     done
     # Detect config dirs a previous release deployed but this one no longer
     # carries (detected via the timestamped backups made above). Never delete
-    # user configs — just surface them so stale apps aren't silently kept.
+    # user configs -- just surface them so stale apps aren't silently kept.
     for bak in "$HOME"/.config/*.bak.*; do
         [ -e "$bak" ] || continue
         base="$(basename "${bak%%.bak.*}")"
         [ -d "$HOME/.config/$base" ] || continue
         [ -d "$CONFIGS_SRC/$base" ] && continue
-        log_warn "~/.config/$base was deployed by an older release but is no longer in configs/ — remove it if unused (rm -rf ~/.config/$base)"
+        log_warn "~/.config/$base was deployed by an older release but is no longer in configs/ -- remove it if unused (rm -rf ~/.config/$base)"
     done
 else
-    log_warn "configs/ not found next to scripts/ — skipping config deploy."
+    log_warn "configs/ not found next to scripts/ -- skipping config deploy."
 fi
 
 # Keep ~/.config/sway/current-theme pointing at the default palette name.
 [ -d "$HOME/.config/sway" ] || mkdir -p "$HOME/.config/sway"
-ln -sfn catppuccin-mocha "$HOME/.config/sway/current-theme" 2>/dev/null || true
+ln -sfn graphite-amber "$HOME/.config/sway/current-theme" 2>/dev/null || true
 
 # ---- 4. PATH: ~/.local/bin + /usr/local/sbin --------------------------------
 if ! grep -qF '.local/bin' "$HOME/.profile" 2>/dev/null; then
@@ -111,7 +111,7 @@ LIGHTDM_CONF="/etc/lightdm/lightdm.conf.d/60-sway-setup.conf"
 
 priv tee "$SESSION_BIN" > /dev/null <<'EOF'
 #!/bin/sh
-# SwaySetup Wayland session — launch Sway on a fresh D-Bus session bus.
+# SwaySetup Wayland session -- launch Sway on a fresh D-Bus session bus.
 # Used by LightDM (user-session=sway-setup) and by anything calling "sway-session".
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
@@ -142,10 +142,10 @@ EOF
     if [ -f /etc/lightdm/lightdm.conf ] && ! grep -q '^user-session' /etc/lightdm/lightdm.conf; then
         log_ok "LightDM default session set: SwaySetup (wayland). Select \"SwaySetup\" in the greeter."
     else
-        log_ok "LightDM 60-sway-setup.conf installed — greeter defaults to SwaySetup."
+        log_ok "LightDM 60-sway-setup.conf installed -- greeter defaults to SwaySetup."
     fi
 else
-    log_warn "lightdm not detected — install alignment skipped (session desktop file still installed)."
+    log_warn "lightdm not detected -- install alignment skipped (session desktop file still installed)."
 fi
 
 # ---- 6. run sway-over-XFCE extras ---------------------------------------------

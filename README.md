@@ -1,9 +1,9 @@
 # SwaySetup
 
-![Devuan 6](https://img.shields.io/badge/Devuan-6-9B183E?logo=devuan&logoColor=white)
-![Debian 13](https://img.shields.io/badge/Debian-13-A81D33?logo=debian&logoColor=white)
-![Sway](https://img.shields.io/badge/Sway-Wayland-6B8E23?logo=sway&logoColor=white)
-![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-green.svg)
+![Devuan 6](https://img.shields.io/badge/Devuan-6-202329?logo=devuan&logoColor=E8A33D)
+![Debian 13](https://img.shields.io/badge/Debian-13-202329?logo=debian&logoColor=E8A33D)
+![Sway](https://img.shields.io/badge/Sway-Wayland-202329?logo=sway&logoColor=E8A33D)
+![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-8FB57A.svg)
 
 A post-install toolkit for a ThinkPad-class laptop running Devuan 6
 (Excalibur) or Debian 13 (Trixie). It stands up a lean Sway Wayland desktop
@@ -41,7 +41,7 @@ For a step-by-step run:
 - Provides `swayctl` for theme, wallpaper, bar, lock, power, clipboard,
   screenshots, sound, networking, toggles, status, updates and doctor checks.
   The old `debsway` name remains as a symlink alias.
-- Ships 12 palettes: catppuccin-mocha (default), doomone, dracula, everforest,
+- Ships 12 palettes: graphite-amber (default), doomone, dracula, everforest,
   github_dark, gruvbox, kanagawa, monokai, moonfly, nord, retro and rose-pine.
   `swayctl theme set <name>` re-renders Sway, foot, swaync, rofi or wofi,
   wlogout and swaylock.
@@ -157,4 +157,4 @@ GPL-2.0. See [LICENSE](LICENSE). Vendored components keep their own licenses.
 
 ## Repository standard
 
-This repo follows the SOSMLG standard: [contributing](CONTRIBUTING.md), [security](SECURITY.md), [changelog](CHANGELOG.md). Local workflow: [English guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.md) / [Arabic guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.ar.md).
+This repo follows the SOSMLG standard: [contributing](CONTRIBUTING.md), [security](SECURITY.md), [changelog](CHANGELOG.md). Local workflow: [English guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.md) / [Arabic guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.ar.md). Visual standard: [theme](https://github.com/SOSMLG/.github/blob/main/docs/THEME.md) / [الطابع البصري](https://github.com/SOSMLG/.github/blob/main/docs/THEME.ar.md).

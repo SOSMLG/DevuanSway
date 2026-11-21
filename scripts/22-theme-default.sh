@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# SWAY_DESC: Apply default theme (catppuccin-mocha) + cursor + wallpaper
+# SWAY_DESC: Apply default theme (graphite-amber) + cursor + wallpaper
 # SWAY_DEFAULT: Y
 # =======================================================
-# 22-theme-default.sh — initial theme application
+# 22-theme-default.sh -- initial theme application
 # -------------------------------------------------------
-# Pins the default palette (catppuccin-mocha) by running the
+# Pins the default palette (graphite-amber) by running the
 # same renderer 21 installs, then sets a sane GTK dark scheme and
 # re-asserts the bundled default wallpaper. Everything beyond this
-# is live-swappable with `swayctl theme set <name>` / `swayctl bg …`.
+# is live-swappable with `swayctl theme set <name>` / `swayctl bg ...`.
 #
 # Why a separate step: keep the CLI installer (21) focused on
 # plumbing and let this step own the *choice* of what the box looks
@@ -23,18 +23,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/common.sh"
 
 require_not_root
-log_head "Default theme: catppuccin-mocha"
+log_head "Default theme: graphite-amber"
 
 SWAYCTL="$HOME/.local/bin/swayctl"
 if [ ! -x "$SWAYCTL" ]; then
-    log_err "swayctl not installed — run scripts/21-swayctl-cli.sh first."
+    log_err "swayctl not installed -- run scripts/21-swayctl-cli.sh first."
     exit 1
 fi
 
-THEME="${SWAY_THEME:-catppuccin-mocha}"
+THEME="${SWAY_THEME:-graphite-amber}"
 if ! "$SWAYCTL" theme list 2>/dev/null | grep -qx "$THEME"; then
-    log_warn "Theme '$THEME' unknown — falling back to catppuccin-mocha."
-    THEME="catppuccin-mocha"
+    log_warn "Theme '$THEME' unknown -- falling back to graphite-amber."
+    THEME="graphite-amber"
 fi
 
 "$SWAYCTL" theme set "$THEME" && log_ok "Theme applied: $THEME"
@@ -46,7 +46,7 @@ command_exists gsettings && {
 }
 
 # Re-assert the bundled default wallpaper (marker + sway output).
-DEFAULT_WALL="$HOME/.config/sway/wallpapers/catppuccin-mocha.png"
+DEFAULT_WALL="$HOME/.config/sway/wallpapers/graphite-amber.png"
 if [ -f "$DEFAULT_WALL" ] && [ -z "$("$SWAYCTL" bg current 2>/dev/null)" ]; then
     "$SWAYCTL" bg set "$DEFAULT_WALL" >/dev/null 2>&1 && log_ok "Default wallpaper set."
 fi

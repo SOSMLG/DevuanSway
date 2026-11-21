@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =======================================================
-# Verify Setup — end-state audit
+# Verify Setup -- end-state audit
 # -------------------------------------------------------
 # One-pass check of the toolkit's expected end state:
 # group membership, key packages, swayctl + 12-palette
@@ -43,7 +43,7 @@ pkg() {  # pkg <name> [critical|optional]
     elif [ "$level" = "optional" ]; then
         state="warn"; detail="not installed (optional)"
     else
-        state="fail"; detail="missing — re-run the relevant script"
+        state="fail"; detail="missing -- re-run the relevant script"
     fi
     report "$name" "$state" "$detail"
 }
@@ -56,7 +56,7 @@ bin() {  # bin <command> [critical|optional]
     elif [ "$level" = "optional" ]; then
         state="warn"; detail="not installed (optional)"
     else
-        state="fail"; detail="missing — re-run the relevant script"
+        state="fail"; detail="missing -- re-run the relevant script"
     fi
     report "bin: $name" "$state" "$detail"
 }
@@ -69,7 +69,7 @@ cfg() {  # cfg <label> <path> [critical|optional]
     elif [ "$level" = "optional" ]; then
         state="warn"; detail="missing (optional)"
     else
-        state="fail"; detail="missing — re-run the relevant script"
+        state="fail"; detail="missing -- re-run the relevant script"
     fi
     report "cfg: $label" "$state" "$detail"
 }
@@ -129,10 +129,10 @@ if [ -d "$HOME/.local/share/swayctl/themes" ]; then
     if [ "$theme_count" -ge 12 ]; then
         report "swayctl theme engine" ok "$theme_count palettes"
     else
-        report "swayctl theme engine" fail "only $theme_count palettes — re-run 21-swayctl-cli.sh"
+        report "swayctl theme engine" fail "only $theme_count palettes -- re-run 21-swayctl-cli.sh"
     fi
 else
-    report "swayctl install tree" fail "missing — re-run 21-swayctl-cli.sh"
+    report "swayctl install tree" fail "missing -- re-run 21-swayctl-cli.sh"
 fi
 ST="$(cat "$HOME/.local/state/swayctl/theme" 2>/dev/null || echo none)"
 report "swayctl active theme" ok "$ST"
@@ -143,20 +143,20 @@ cfg "swaync/config.json" "$HOME/.config/swaync/config.json"
 cfg "swaync/style.css" "$HOME/.config/swaync/style.css"
 cfg "wofi/style.css" "$HOME/.config/wofi/style.css"
 if grep -q '^location=bottom' "$HOME/.config/wofi/config" 2>/dev/null; then
-    report "wofi anchor" ok "bottom — rises from above the built-in bar"
+    report "wofi anchor" ok "bottom -- rises from above the built-in bar"
 else
-    report "wofi anchor" fail "expected location=bottom — re-run: swayctl theme set"
+    report "wofi anchor" fail "expected location=bottom -- re-run: swayctl theme set"
 fi
 
 cfg "rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
 cfg "rofi/theme.rasi" "$HOME/.config/rofi/theme.rasi"
 cfg "swaybar palette.env" "$HOME/.config/swaybar/palette.env" optional
 if [ -x "$HOME/.config/swaybar/status.sh" ]; then
-    report "swaybar status.sh" ok "executable — JSON status protocol"
+    report "swaybar status.sh" ok "executable -- JSON status protocol"
 elif [ -f "$HOME/.config/swaybar/status.sh" ]; then
-    report "swaybar status.sh" fail "not executable — swaybar prints 'error reading from status command' (chmod +x)"
+    report "swaybar status.sh" fail "not executable -- swaybar prints 'error reading from status command' (chmod +x)"
 else
-    report "swaybar status.sh" fail "missing — re-run 10-sway-core.sh"
+    report "swaybar status.sh" fail "missing -- re-run 10-sway-core.sh"
 fi
 cfg "swaylock/config" "$HOME/.config/swaylock/config"
 cfg "wlogout/layout" "$HOME/.config/wlogout/layout"
@@ -167,23 +167,23 @@ cfg "gammastep/config.ini" "$HOME/.config/gammastep/config.ini"
 # 21-swayctl-cli.sh prunes the installed tree on deploy; this makes any
 # leftover visible to the audit instead of silently re-rendering waybar.
 if [ -e "$HOME/.local/share/swayctl/themes/_base/tpl/waybar" ]; then
-    report "waybar remnants" fail "installed tpl still present — re-run 21-swayctl-cli.sh"
+    report "waybar remnants" fail "installed tpl still present -- re-run 21-swayctl-cli.sh"
 elif [ -d "$HOME/.config/waybar" ]; then
-    report "waybar remnants" warn "~/.config/waybar still exists — remove if unused (rm -rf ~/.config/waybar)"
+    report "waybar remnants" warn "~/.config/waybar still exists -- remove if unused (rm -rf ~/.config/waybar)"
 else
-    report "waybar remnants" ok "none — single built-in bar"
+    report "waybar remnants" ok "none -- single built-in bar"
 fi
 
 # --- Overlay / screenshot hardening (swayctl kill, lock cleanup) ----
 if grep -qE '^cmd_kill\(\)' "$HOME/.local/share/swayctl/lib/actions.sh" 2>/dev/null; then
     report "swayctl kill" ok "escape hatch wired"
 else
-    report "swayctl kill" fail "cmd_kill missing — re-run 21-swayctl-cli.sh"
+    report "swayctl kill" fail "cmd_kill missing -- re-run 21-swayctl-cli.sh"
 fi
 if grep -q '\[ -z "$act" \] && return 0' "$HOME/.local/share/swayctl/lib/actions.sh" 2>/dev/null; then
     report "shot menu cancel guard" ok "no respawn loop"
 else
-    report "shot menu cancel guard" fail "respawn loop possible — re-run 21-swayctl-cli.sh"
+    report "shot menu cancel guard" fail "respawn loop possible -- re-run 21-swayctl-cli.sh"
 fi
 if grep -q 'Bar  (built-in swaybar)' "$HOME/.local/share/swayctl/lib/actions.sh" 2>/dev/null; then
     report "swayctl menu bar entry" fail "no-op entry still present"
@@ -192,7 +192,7 @@ else
 fi
 grep -qF 'bindsym --locked $mod+Ctrl+Escape exec swayctl kill' "$HOME/.config/sway/config" 2>/dev/null \
     && report "screenshot panic key" ok "\$mod+Ctrl+Escape (locked-safe)" \
-    || report "screenshot panic key" fail "missing — re-run 10-sway-core.sh"
+    || report "screenshot panic key" fail "missing -- re-run 10-sway-core.sh"
 
 stale=0
 for f in "$HOME/.config/sway/keybindings.conf" \
@@ -215,16 +215,16 @@ fi
 
 migbaks=$(ls "$HOME"/.config/waybar.bak.* "$HOME"/.local/state/swayctl/bar.bak.* "$HOME"/.config/sway/config.bak.* 2>/dev/null)
 if [ -n "$migbaks" ]; then
-    report "migration backups" warn "still present — remove by hand when verified"
+    report "migration backups" warn "still present -- remove by hand when verified"
 else
     report "migration backups" ok "none"
 fi
 
 # --- 5. Wallpaper ------------------------------------------------------------
-if [ -f "$HOME/.config/sway/wallpapers/catppuccin-mocha.png" ]; then
+if [ -f "$HOME/.config/sway/wallpapers/graphite-amber.png" ]; then
     report "default wallpaper" ok
 else
-    report "default wallpaper" warn "missing — re-run 22-theme-default.sh"
+    report "default wallpaper" warn "missing -- re-run 22-theme-default.sh"
 fi
 
 # --- 6. Engineering stack (30-32) -------------------------------------------
@@ -268,14 +268,14 @@ service_state NetworkManager NetworkManager optional
 if [ -f /usr/share/wayland-sessions/sway-setup.desktop ]; then
     report "SwaySetup session desktop" ok
 else
-    report "SwaySetup session desktop" fail "missing — re-run 10-sway-core.sh"
+    report "SwaySetup session desktop" fail "missing -- re-run 10-sway-core.sh"
 fi
 
 echo
 echo -e "${GREEN}  ${PASS} passed${NC}, ${RED}${FAIL} failed${NC}, ${YELLOW}${WARN} warnings${NC}"
 if [ "$FAIL" -gt 0 ]; then
     echo
-    log_err "Some checks failed — see lines above, then re-run the relevant script."
+    log_err "Some checks failed -- see lines above, then re-run the relevant script."
     exit 1
 fi
 exit 0

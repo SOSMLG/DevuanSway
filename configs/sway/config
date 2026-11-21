@@ -127,7 +127,7 @@ exec swayidle -w \
 # Managed by `swayctl bg set` — _bg_apply rewrites this line AND the
 # ~/.local/state/swayctl/bg marker, so `reload` no longer reverts wallpaper.
 # Use `swayctl bg set <file>` instead of hand-editing.
-output * bg ${HOME}/.config/sway/wallpapers/catppuccin-mocha.png fill
+output * bg ${HOME}/.config/sway/wallpapers/graphite-amber.png fill
 
 ### Input configuration
 input type:touchpad {
