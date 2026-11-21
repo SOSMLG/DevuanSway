@@ -154,3 +154,7 @@ GPL-2.0. See [LICENSE](LICENSE). Vendored components keep their own licenses.
 - [Devuan-Kde](https://github.com/SOSMLG/Devuan-Kde): KDE Plasma on Devuan.
 - [devuan-cinnamon-setup](https://github.com/SOSMLG/devuan-cinnamon-setup): Cinnamon on Devuan.
 - [XfceMlg](https://github.com/SOSMLG/XfceMlg): XFCE desktop toolkit.
+
+## Repository standard
+
+This repo follows the SOSMLG standard: [contributing](CONTRIBUTING.md), [security](SECURITY.md), [changelog](CHANGELOG.md). Local workflow: [English guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.md) / [Arabic guide](https://github.com/SOSMLG/.github/blob/main/docs/GIT_GUIDE.ar.md).

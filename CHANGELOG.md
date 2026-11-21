@@ -11,7 +11,13 @@ to its current shape. The fork keeps that history intact, but where an entry
 conflicts with what this repo does today, **the fork wins** — the Nix-style
 dotfiles staging and the old install-first layout do not exist here.
 
-## [2026-09-26] — Pre-push audit: swaync schema, shellcheck, repo hygiene
+## [Unreleased]
+
+### Added
+
+- Repository health files and read-only CI validation.
+
+## [2026-09-26] - Pre-push audit: swaync schema, shellcheck, repo hygiene
 
 - **swaync 0.11 schema violations fixed in the theme template.** The
   rendered config carried `control-center-exclusive-zone: 0` (schema wants a
