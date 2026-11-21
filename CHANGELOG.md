@@ -288,7 +288,7 @@ installs (`sway-setup.desktop` / `sway-setup-session`).
   old-state migration (`debsway` → `swayctl`) is unchanged.
 - **verify.sh moved to the repo root** (was `scripts/verifySetup.sh`);
   `run.sh --verify` and `install.sh` updated. Dropped the README's false
-  claim of a `tests/`-based test suite — verification is the read-only
+  claim of a separate test suite — verification is the read-only
   `verify.sh` audit (which does exist and covers the greeter session,
   swayctl + 12-palette engine, packages, configs and services).
 - **Docs added.** `QUICKSTART.md` (rewritten to match the actual keybindings),

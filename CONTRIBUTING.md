@@ -1,7 +1,7 @@
 # Contributing
 
 Pull requests are welcome. The fork lives on GitHub at
-[SOSMLG/sway-setup](https://github.com/SOSMLG/sway-setup) — fork it, branch
+[SOSMLG/DevuanSway](https://github.com/SOSMLG/DevuanSway) - fork it, branch
 off `main`, and open a PR. There's no CI gate yet, so the review is whatever
 the maintainer is in the mood for, but the checklist below is what gets a
 change merged without back-and-forth.

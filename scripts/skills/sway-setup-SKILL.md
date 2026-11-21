@@ -77,10 +77,8 @@ suggesting commands or diagnosing issues on this system.
 - Root escalation via `priv()`: **doas** first, sudo fallback
   (`SWAY_PRIV=doas|sudo`). Never bare `sudo`. Every apt action checks what's
   installed first; backups precede destructive writes.
-- Test suite (three tiers, read-only): `make check` or `./tests/run.sh`
-  (lint, sandboxed unit tests, consistency guards, read-only apt-checks).
-  Run it after adding a `scripts/##-*.sh` step; content deb via `make pkg-deb`,
-  verify with `make check-deb`, release gate `make release-preflight`.
+- Runtime verification is read-only: `./verify.sh` or `./run.sh --verify`.
+  Run it after adding a `scripts/##-*.sh` step or changing configs.
 - Engineering stack: Octave/GUI, Jupyter, SciLab/Xcos, Qucs, KiCad, matlab
   (BYO .deb via `swayctl eng matlab <file.deb>`); Python control/slycot in
   venv `~/.local/venv/eng` (`swayctl eng venv`).
@@ -88,5 +86,5 @@ suggesting commands or diagnosing issues on this system.
 ## Working style
 - Verify with real, read-only commands before asserting anything; never guess a
   package name, command output, or config value.
-- After changes, run the relevant check that exists (`make check`, `bash -n`,
-  `./run.sh --list`) instead of assuming success.
+- After changes, run the relevant check that exists (`bash -n`,
+  `./run.sh --list`, `./verify.sh`) instead of assuming success.
