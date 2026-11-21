@@ -1,17 +1,17 @@
+![banner](assets/banner.svg)
+
 # SwaySetup
 
-![Devuan 6](https://img.shields.io/badge/Devuan-6-202329?logo=devuan&logoColor=E8A33D)
-![Debian 13](https://img.shields.io/badge/Debian-13-202329?logo=debian&logoColor=E8A33D)
-![Sway](https://img.shields.io/badge/Sway-Wayland-202329?logo=sway&logoColor=E8A33D)
-![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-8FB57A.svg)
+stands up a lean sway wayland desktop on a thinkpad-class laptop running devuan 6 or debian 13, with one compositor, bar, notifier, launcher and terminal.
 
-A post-install toolkit for a ThinkPad-class laptop running Devuan 6
-(Excalibur) or Debian 13 (Trixie). It stands up a lean Sway Wayland desktop
-with one compositor, one bar, one notifier, one launcher, one terminal, a
-12-palette theme engine and a single `swayctl` CLI.
+[read the quick start](#quick-start)
 
-No systemd. No GNOME, KDE or XFCE. OpenRC or sysvinit with LightDM, and exactly
-one display manager owning the console.
+| | |
+| --- | --- |
+| **session** | sway is the default lightdm session on openrc or sysvinit. no systemd. |
+| **tools** | one compositor, one bar, one notifier, one launcher and one terminal. |
+| **theme** | a 12-palette theme engine and one `swayctl` command. |
+| **verify** | `./run.sh --verify` audits the end state without writing. |
 
 ## Quick start
 
