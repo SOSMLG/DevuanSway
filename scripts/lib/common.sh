@@ -87,17 +87,17 @@ require_not_root() {
     # escalation then dies mid-run with a bare password rejection. Warn once,
     # early, with the exact fix — never fatal, the user may know better.
     if ! id -nG 2>/dev/null | grep -qwE "sudo|wheel|doas" \
-       && ! grep -qw "$USER" /etc/doas.conf 2>/dev/null; then
-        log_warn "Your user is in no privilege group (sudo/wheel) and /etc/doas.conf names no rule for $USER."
+       && ! grep -qw "${USER:-$(id -un)}" /etc/doas.conf 2>/dev/null; then
+        log_warn "Your user is in no privilege group (sudo/wheel) and /etc/doas.conf names no rule for ${USER:-$(id -un)}."
         log_warn "Escalation is likely to fail. Fix with ONE of these (as root), then relogin:"
-        log_warn "  usermod -aG sudo $USER   # Debian stock path"
-        log_warn "  printf 'permit persist $USER as root\n' > /etc/doas.conf   # BSD-minimal path"
+        log_warn "  usermod -aG sudo ${USER:-$(id -un)}   # Debian stock path"
+        log_warn "  printf 'permit persist ${USER:-$(id -un)} as root\n' > /etc/doas.conf   # BSD-minimal path"
     fi
 }
 
 # Real (non-root) user, even if this got invoked via escalation upstream.
 # doas exports DOAS_USER the way sudo exports SUDO_USER.
-ACTUAL_USER="${SUDO_USER:-${DOAS_USER:-$USER}}"
+ACTUAL_USER="${SUDO_USER:-${DOAS_USER:-${USER:-$(id -un)}}}"
 [ -z "$ACTUAL_USER" ] && ACTUAL_USER="$(id -un)"
 
 run_as_user() {
