@@ -14,13 +14,12 @@ the short version of how to live here.
 - `Print` takes a full screenshot, `Super + Print` a selection — both land in
   `~/Pictures/screenshots` and hit the clipboard. `Super + v` opens the
   clipboard history.
-- `Super + Shift + q` closes whatever's focused (there is no plain
-  `Super + q` binding).
+- `Super + q` or `Super + Shift + q` closes whatever's focused.
 
 ## Everyday tasks
 
-**Change the theme.** `swayctl theme set nord` (or pick from `swayctl menu`,
-or `swayctl theme list`) re-renders sway/swaybar, foot, swaync, wofi,
+**Change the theme.** Pick from `swayctl menu`, or run `swayctl theme list`
+and use `swayctl theme set <name>`. Either way it re-renders sway/swaybar, foot, swaync, wofi,
 wlogout and swaylock from the 12 bundled palettes and soft-reloads the
 session — no logout. Defaults stick across logins.
 
@@ -28,9 +27,9 @@ session — no logout. Defaults stick across logins.
 shows them. Drop your own images into `~/.config/sway/wallpapers/` and they
 join the list.
 
-**Volume & brightness.** Hardware keys (XF86*) only — mute pops a swaync OSD,
-media keys drive playerctl. `pavucontrol` is in the menu for the rest.
-Brightness keys use `brightnessctl`.
+**Volume & brightness.** Hardware keys (XF86*) plus `$mod+F10/F11/F12` —
+volume changes raise a swaync notification, media keys drive playerctl.
+`pavucontrol` is in the menu for the rest. Brightness keys use `brightnessctl`.
 
 **Notifications.** swaync runs at session start; notifications scroll in
 bottom-right. There's no toggle keybind — `swayctl` doesn't manage the daemon,

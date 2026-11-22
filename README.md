@@ -41,8 +41,8 @@ For a step-by-step run:
 - Provides `swayctl` for theme, wallpaper, bar, lock, power, clipboard,
   screenshots, sound, networking, toggles, status, updates and doctor checks.
   The old `debsway` name remains as a symlink alias.
-- Ships 12 palettes: graphite-amber (default), doomone, dracula, everforest,
-  github_dark, gruvbox, kanagawa, monokai, moonfly, nord, retro and rose-pine.
+- Ships a theme engine with Graphite Amber as the default. Use
+  `swayctl theme list` in the running session to see the bundled palettes;
   `swayctl theme set <name>` re-renders Sway, foot, swaync, rofi or wofi,
   wlogout and swaylock.
 - Uses Sway's built-in bar. `swayctl bar restart` re-applies it, and

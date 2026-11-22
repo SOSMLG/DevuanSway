@@ -59,9 +59,8 @@ the libs in `swayctl/lib/` (`common`, `theme`, `actions`, `doctor`, `setup`,
 
 - Palette tokens are `C_BG..C_ORANGE`, `C_T0-7`, `C_TB0-7` — hex **without**
   the `#` (templates add it). Add a palette by copying any existing one and
-  changing the values; the 12-palette list is: graphite-amber (default),
-  doomone, dracula, everforest, github_dark, gruvbox, kanagawa, monokai,
-  moonfly, nord, retro, rose-pine.
+  changing the values. Graphite Amber is the default; use `swayctl theme list`
+  to see the bundled palettes in the running session.
 - Templates are `@@TOKEN@@` placeholders rendered by `render_palette()` in
   `swayctl/lib/theme.sh`. If you change a template, note that already-rendered
   copies under `~/.config/` won't re-render unless the file is regenerated —
