@@ -52,10 +52,9 @@ suggesting commands or diagnosing issues on this system.
     (`swayctl power`), idle is swayidle. Policykit agent: `lxqt-policykit-agent`.
 
 ## Theming & the tree
-- The rice is the **graphite-amber** palette by default, one of **12**
-  installed palettes (doomone, dracula, everforest, github_dark, gruvbox,
-  kanagawa, monokai, moonfly, nord, retro, rose-pine). Switch with
-  `swayctl theme set <name>` — renders sway/colors.conf, foot, swaync,
+- The rice is the **graphite-amber** palette by default. Use
+  `swayctl theme list` in the running session to see the bundled palettes.
+  Switch with `swayctl theme set <name>` — renders sway/colors.conf, foot, swaync,
   wofi+rofi, wlogout, swaylock. Wallpapers: `swayctl bg panel`.
 
 ## This toolkit's own conventions

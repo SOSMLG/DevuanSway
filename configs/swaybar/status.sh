@@ -2,7 +2,7 @@
 # swaybar status script — built-in swaybar status provider.
 #
 # Speaks swaybar's JSON status-line protocol (swaybar-protocol(7)):
-#   line 1: {"version":1}
+#   line 1: {"version":1,"click_events":true}
 #   then one JSON array per status update (an infinite stream).
 # Blocks are named and carry per-block palette colors. Colors come from ~/.config/swaybar/palette.env, which
 # the swayctl theme engine renders from the same 12-palette source as
@@ -248,7 +248,7 @@ emit() {
 	c_mem="$SWAYBAR_ACCENT"
 	c_disk="$SWAYBAR_TEXT"
 	c_upd="$SWAYBAR_YELLOW"
-	[[ "$upd" == "[REBOOT]" ]] && c_upd="$SWAYBAR_RED"
+	[[ "$upd" == *"[REBOOT]"* ]] && c_upd="$SWAYBAR_RED"
 	c_bat="$SWAYBAR_TEXT"
 	if [ -n "$cap" ]; then
 		if [ "$cap" -le 20 ]; then
@@ -325,11 +325,11 @@ click_handle() { # click_handle <event-json>
 # '[', then one element per update, each followed by a comma. The array is
 # NEVER closed (that is what swaybar's parser expects; emitting a closed
 # array per line makes it print "invalid i3bar json"). Match i3status:
-#   {"version":1}\n
+#   {"version":1,"click_events":true}\n
 #   [\n
 #   [{...}],\n
 #   [{...}],\n
-printf '{"version":1}\n'
+printf '{"version":1,"click_events":true}\n'
 printf '[\n'
 (while IFS= read -r ev; do [ -n "$ev" ] && click_handle "$ev"; done) &
 while true; do

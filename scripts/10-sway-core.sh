@@ -44,7 +44,7 @@ CORE_PKGS=(
     sway swaybg swayidle swaylock sway-notification-center wlogout
     foot wofi rofi xwayland xdg-desktop-portal-wlr
     grim slurp swappy wl-clipboard cliphist wf-recorder
-    lxqt-policykit
+    jq lxqt-policykit
     thunar thunar-archive-plugin thunar-volman gvfs-backends gvfs-fuse xarchiver
     pipewire-audio
     fonts-noto-core fonts-noto-color-emoji fonts-jetbrains-mono fonts-font-awesome

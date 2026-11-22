@@ -110,7 +110,7 @@ done
 
 # --- 2. Core Sway shell (10-sway-core.sh) ----------------------------------
 for p in sway swaybg swaylock swayidle sway-notification-center wlogout \
-         foot wofi rofi grim slurp swappy cliphist wf-recorder \
+         foot wofi rofi grim slurp swappy cliphist wf-recorder jq \
          lxqt-policykit thunar thunar-volman gvfs-backends xarchiver \
          pipewire-audio fonts-jetbrains-mono fonts-noto-color-emoji; do
     pkg "$p"

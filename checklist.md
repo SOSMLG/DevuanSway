@@ -43,10 +43,8 @@ git checkout main && git pull
 
 ## Phase 3 — Theme engine
 
-- [ ] `swayctl theme list` shows 12 palettes (graphite-amber, doomone,
-      dracula, everforest, github_dark, gruvbox, kanagawa, monokai, moonfly,
-      nord, retro, rose-pine)
-- [ ] `swayctl theme set nord` re-renders foot/swaync/wofi/wlogout/
+- [ ] `swayctl theme list` shows the bundled palettes with graphite-amber as the default
+- [ ] `swayctl theme set <name>` re-renders foot/swaync/wofi/wlogout/
       swaylock/swaybar — open foot (`Super + Return`) and confirm the palette moved
 - [ ] Files with a `SWAYCTL_KEEP` marker are untouched (edit one under
       `~/.config/swaync/`, set a KEEP comment, re-render, confirm it survives)
