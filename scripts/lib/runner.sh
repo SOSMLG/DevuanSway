@@ -26,7 +26,7 @@ CYAN="\033[0;36m"
 RESET="\033[0m"
 
 # --- Directory setup ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 SCRIPTS_DIR="$SCRIPT_DIR/scripts"
 
 usage() {
@@ -50,9 +50,9 @@ per script. Options:
   -h, --help            Show this help.
 
 TL;DR:  ./install.sh         one-command, everything, unattended
-        ./run.sh --list      see what it would do
-        ./run.sh --phase core,desktop
-        ./run.sh --only firefox,useful-apps
+        ./install.sh --list      see what it would do
+        ./install.sh --phase core,desktop
+        ./install.sh --only firefox,useful-apps
 EOF
 }
 
@@ -102,7 +102,7 @@ done
 # must land in the real user's $HOME, not /root. Scripts escalate (doas)
 # themselves for the bits that need it.
 if [ "$(id -u)" -eq 0 ] && [ -z "${SUDO_USER:-${DOAS_USER:-}}" ]; then
-    echo -e "${RED}Please run this as your normal user, not as root / doas bash run.sh.${RESET}"
+    echo -e "${RED}Please run this as your normal user, not as root / doas bash install.sh.${RESET}"
     echo -e "${YELLOW}Each script will escalate itself (doas) for the parts that need it.${RESET}"
     exit 1
 fi
@@ -239,10 +239,10 @@ if [ "$DO_LIST" -eq 1 ]; then
     done
     unset _last_phase
     echo
-    echo -e "Phases: core desktop engineering apps utils  (filter: ${CYAN}./run.sh --phase core,desktop${RESET})"
-echo -e "Minimal (no applications): ${CYAN}./run.sh --phase core,desktop${RESET}"
+    echo -e "Phases: core desktop engineering apps utils  (filter: ${CYAN}./install.sh --phase core,desktop${RESET})"
+echo -e "Minimal (no applications): ${CYAN}./install.sh --phase core,desktop${RESET}"
     echo -e "Run everything unattended: ${CYAN}./install.sh${RESET}"
-    echo -e "Run everything interactively: ${CYAN}./run.sh${RESET}"
+    echo -e "Run everything interactively: ${CYAN}./install.sh${RESET}"
     exit 0
 fi
 
@@ -292,7 +292,7 @@ echo -e "${BLUE}   sway-setup -- Devuan 6 (Excalibur) + Sway${RESET}"
 echo -e "${BLUE}=========================================================${RESET}\n"
 
 # --- One apt refresh, then let the scripts skip their own ------------------
-# NOTE: run.sh never sources scripts/lib/common.sh, so it keeps a local
+# NOTE: the runner never sources scripts/lib/common.sh, so it keeps a local
 # priv() instead of the shared helper (same contract: doas first, sudo fallback).
 priv() {
     if command -v doas >/dev/null 2>&1; then doas "$@"; else sudo "$@"; fi

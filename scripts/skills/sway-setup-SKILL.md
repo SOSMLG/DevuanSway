@@ -67,8 +67,8 @@ suggesting commands or diagnosing issues on this system.
     47 editors), 5x utils (50 maintenance, 51 backup, 52 skel-export).
     Each is independently runnable; they source `scripts/lib/common.sh`
     (ask/log/install_pkgs/priv). Metadata comes from `# SWAY_DESC:` /
-    `# SWAY_DEFAULT:` headers read by `run.sh`.
-- `run.sh` orchestrates (`--list/--phase/--only/--yes/--full/--verify`);
+    `# SWAY_DEFAULT:` headers read by `install.sh`.
+- `install.sh` orchestrates (`--list/--phase/--only/--yes/--full/--verify`);
   `install.sh` is the unattended wrapper. Env vars: `SWAY_ASSUME_YES=1`,
   `SWAY_SKIP_APT_UPDATE=1`, pins `XFCE_GTK_REF=`, `XFCE_CURSOR_TAG=v2.0.0`,
   `NERD_FONT_TAG=3.4.0`, `BETTERFOX_TAG=150.0`. State lives in
@@ -76,7 +76,7 @@ suggesting commands or diagnosing issues on this system.
 - Root escalation via `priv()`: **doas** first, sudo fallback
   (`SWAY_PRIV=doas|sudo`). Never bare `sudo`. Every apt action checks what's
   installed first; backups precede destructive writes.
-- Runtime verification is read-only: `./verify.sh` or `./run.sh --verify`.
+- Runtime verification is read-only: `./verify.sh` or `./install.sh --verify`.
   Run it after adding a `scripts/##-*.sh` step or changing configs.
 - Engineering stack: Octave/GUI, Jupyter, SciLab/Xcos, Qucs, KiCad, matlab
   (BYO .deb via `swayctl eng matlab <file.deb>`); Python control/slycot in
@@ -86,4 +86,4 @@ suggesting commands or diagnosing issues on this system.
 - Verify with real, read-only commands before asserting anything; never guess a
   package name, command output, or config value.
 - After changes, run the relevant check that exists (`bash -n`,
-  `./run.sh --list`, `./verify.sh`) instead of assuming success.
+  `./install.sh --list`, `./verify.sh`) instead of assuming success.

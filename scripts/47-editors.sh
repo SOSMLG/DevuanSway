@@ -51,7 +51,7 @@ install_pkgs "Neovim" neovim git
 NVIM_CFG="$HOME/.config/nvim"
 if command -v nvim >/dev/null 2>&1; then
     if [ -d "$NVIM_CFG/lua" ]; then
-        log_ok "~/.config/nvim already has a real config — leaving it alone."
+        log_ok "$HOME/.config/nvim already has a real config - leaving it alone."
     elif ask "Bootstrap LazyVim at ~/.config/nvim?"; then
         log_info "Cloning the LazyVim starter..."
         mkdir -p "$NVIM_CFG"

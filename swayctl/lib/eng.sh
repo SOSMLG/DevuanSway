@@ -99,7 +99,7 @@ cmd_eng() {
             printf '  %-8s %s\n' "qucs"    "SPICE + RF schematics"
             printf '  %-8s %s\n' "kicad"   "PCB design"
             printf '  %-8s %s\n' "matlab"  "MathWorks Matlab (BYO .deb)"
-            printf '  %-8s %s\n' "venv"    "~/.local/venv/eng (python-control)"
+            printf '  %-8s %s\n' "venv"    "$HOME/.local/venv/eng (python-control)"
             ;;
         *)
             printf '%s\n' "octave" "jupyter" "scilab" "qucs" "kicad" "matlab" "venv" | launcher_pick "ENGINEERING" | while read -r t; do cmd_eng "$t"; done

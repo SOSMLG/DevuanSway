@@ -50,9 +50,9 @@ the rest:
 
 ```bash
 cd sway-setup
-./run.sh --list                 # see what exists
-./run.sh --phase core,apps      # pick by phase
-./run.sh --full                 # everything, unattended
+./install.sh --list                 # see what exists
+./install.sh --phase core,apps      # pick by phase
+./install.sh --full                 # everything, unattended
 ```
 
 Reboot when it finishes — the first steps add you to the input/video/render/
@@ -67,7 +67,7 @@ plugdev groups, and that only matters on the next login.
   `~/.config/wlogout/`
 - Theme palettes: `~/.local/share/swayctl/themes/` — re-rendered on every
   `swayctl theme set`
-- Setup steps: `scripts/` in the repo, run via `./run.sh`
+- Setup steps: `scripts/` in the repo, run via `./install.sh`
 - Run and verify logs: `~/.local/state/sway-setup/`
 
 ## Docs

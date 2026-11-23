@@ -10,8 +10,8 @@ manual.
 ```bash
 cd <repo-clone>
 git checkout main && git pull
-./run.sh --list                 # confirm steps render
-./run.sh --phase core,desktop   # minimal base first
+./install.sh --list                 # confirm steps render
+./install.sh --phase core,desktop   # minimal base first
 # log out, log back in, pick "SwaySetup" at LightDM
 ```
 
@@ -68,8 +68,8 @@ swayctl keys                   # keybinding cheat-sheet from the config
 ## Phase 5 — Steps + verification
 
 ```bash
-./run.sh --full
-./run.sh --verify        # or: bash verify.sh
+./install.sh --full
+./install.sh --verify        # or: bash verify.sh
 ```
 
 - [ ] `--full` finishes with no failed steps; `~/.local/state/sway-setup/last-run.log`
@@ -79,7 +79,7 @@ swayctl keys                   # keybinding cheat-sheet from the config
 - [ ] Spot-check a step: `octave --version`,
       `python3 -c "import control"` inside `~/.local/venv/eng`,
       `codium --version`, `opencode --version` (if you ran those phases)
-- [ ] A second run of `./run.sh --full` is a no-op apart from re-checks
+- [ ] A second run of `./install.sh --full` is a no-op apart from re-checks
       (idempotence)
 
 ## When something fails

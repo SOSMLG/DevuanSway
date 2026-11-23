@@ -191,7 +191,8 @@ cmd_shot() {
             command -v swappy >/dev/null 2>&1 && swappy -f "$name" -o "$SHOT_DIR/$(date +%F_%H%M%S)_edit.png"
             ;;
         record)
-            local rec="$SHOT_DIR/$(date +%F_%H%M%S).mp4"
+            local rec
+            rec="$SHOT_DIR/$(date +%F_%H%M%S).mp4"
             if pgrep -x wf-recorder >/dev/null 2>&1; then
                 pkill -INT -x wf-recorder 2>/dev/null
                 notify "Recording saved" "$(ls -t "$SHOT_DIR"/*.mp4 2>/dev/null | head -1)"

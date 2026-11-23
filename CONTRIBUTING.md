@@ -18,7 +18,7 @@ script, so keep it that way:
   `rc-service` on Devuan, sysvinit fallback elsewhere.
 - **No root, ever.** Steps refuse to run as root and escalate only the small
   parts that need elevation. Per-user state lands in the real user's `$HOME`,
-  which is why `run.sh` and every step check `id -u` up front.
+  which is why `install.sh` and every step check `id -u` up front.
 - **Nothing remote is piped into bash.** Install step content runs from files
   on disk and from local payloads (butterbash/, configs/, swayctl/). When a
   tool needs an installer, install the artifact through a real package path
@@ -31,11 +31,11 @@ script, so keep it that way:
 ## Adding or changing a step
 
 Steps live in `scripts/##-*.sh`. The leading digit decides the phase — `1`
-core, `2` desktop, `3` engineering, `4` apps, `5` utils — and `run.sh` sorts
+core, `2` desktop, `3` engineering, `4` apps, `5` utils — and `install.sh` sorts
 by filename, so number accordingly.
 
 - Every step carries two headers near the top, no exceptions:
-  `# SWAY_DESC:` (one line) and `# SWAY_DEFAULT:` (`Y` or `N`). `./run.sh
+  `# SWAY_DESC:` (one line) and `# SWAY_DEFAULT:` (`Y` or `N`). `./install.sh
   --list` reads them, and the README's phase table is generated from the same
   source. The old `DEBSWAY_DESC:`/`DEBSWAY_DEFAULT:` header names are still
   parsed if you forked from an older copy — but write new ones as `SWAY_*`.
@@ -72,9 +72,9 @@ the libs in `swayctl/lib/` (`common`, `theme`, `actions`, `doctor`, `setup`,
 ## Before you push
 
 1. `bash -n` anything you touched, and run `shellcheck` on it if you have it.
-2. `./run.sh --list` — if you changed a step's headers, confirm they render
+2. `./install.sh --list` — if you changed a step's headers, confirm they render
    with the right phase/description/default.
-3. If your change affects the end state, run `./run.sh --verify` (or `bash
+3. If your change affects the end state, run `./install.sh --verify` (or `bash
    verify.sh`) — a read-only audit that must exit with zero FAILs.
 4. Update the CHANGELOG fork section for user-visible changes. Keep the
    historical upstream entries below it untouched.
