@@ -85,7 +85,7 @@ if [ -d "$CONFIGS_SRC" ]; then
         base="$(basename "${bak%%.bak.*}")"
         [ -d "$HOME/.config/$base" ] || continue
         [ -d "$CONFIGS_SRC/$base" ] && continue
-        log_warn "~/.config/$base was deployed by an older release but is no longer in configs/ -- remove it if unused (rm -rf ~/.config/$base)"
+        log_warn "$HOME/.config/$base was deployed by an older release but is no longer in configs/ -- remove it if unused (rm -rf $HOME/.config/$base)"
     done
 else
     log_warn "configs/ not found next to scripts/ -- skipping config deploy."

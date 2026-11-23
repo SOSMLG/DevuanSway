@@ -58,6 +58,7 @@ load_palette() {
         return 1
     fi
     unset _PALETTE_OK
+    # shellcheck source=/dev/null
     . "$f"
     local missing=0 var
     for var in C_BG C_MANTLE C_CRUST C_SURFACE0 C_SURFACE1 C_SURFACE2 C_OVERLAY \

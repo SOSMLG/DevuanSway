@@ -9,7 +9,7 @@
 #
 # Environment variables honored (all optional):
 #   SWAY_ASSUME_YES=1        ask() answers with its default instead of prompting
-#   SWAY_SKIP_APT_UPDATE=1   apt_update() is a no-op (run.sh updates once)
+#   SWAY_SKIP_APT_UPDATE=1   apt_update() is a no-op (install.sh updates once)
 #   SWAY_PRIV=doas|priv      force the privilege escalator (default: doas, priv fallback)
 #
 # Legacy DEBSWAY_* names are still honoured (one-line shim below) for
@@ -151,7 +151,7 @@ ensure_doas_persist() {
 }
 
 # ask() — "Y/n" (default Y) or "y/N" (default N) prompt. With
-# SWAY_ASSUME_YES set (run.sh --yes, or install.sh), the default is
+# SWAY_ASSUME_YES set (install.sh --yes, or install.sh), the default is
 # taken without prompting so the toolkit can run unattended.
 ask() {
     local prompt="$1" default="${2:-Y}" reply
@@ -187,7 +187,7 @@ install_pkgs() {
     fi
 }
 
-# apt_update — refresh package lists exactly once per run. run.sh updates
+# apt_update — refresh package lists exactly once per run. install.sh updates
 # once up front and exports SWAY_SKIP_APT_UPDATE=1 so the per-script
 # refreshes are no-ops; standalone runs still refresh here. Returns
 # apt-get update's exit code so callers can abort if they want to.

@@ -11,7 +11,7 @@ stands up a lean sway wayland desktop on a thinkpad-class laptop running devuan 
 | **session** | sway is the default lightdm session on openrc or sysvinit. no systemd. |
 | **tools** | one compositor, one bar, one notifier, one launcher and one terminal. |
 | **theme** | a 12-palette theme engine and one `swayctl` command. |
-| **verify** | `./run.sh --verify` audits the end state without writing. |
+| **verify** | `./install.sh --verify` audits the end state without writing. |
 
 ## Quick start
 
@@ -27,11 +27,11 @@ cd DevuanSway
 For a step-by-step run:
 
 ```bash
-./run.sh                       # interactive
-./run.sh --list                # show steps, phases and defaults
-./run.sh --phase core,desktop  # minimal desktop
-./run.sh --only firefox        # a single step
-./run.sh --verify              # audit the end state
+./install.sh                       # interactive
+./install.sh --list                # show steps, phases and defaults
+./install.sh --phase core,desktop  # minimal desktop
+./install.sh --only firefox        # a single step
+./install.sh --verify              # audit the end state
 ```
 
 ## What it does
@@ -66,7 +66,7 @@ MathWorks as a local `.deb`.
 
 ## Options
 
-`run.sh` accepts:
+`install.sh` accepts:
 
 | Option | Meaning |
 |---|---|
@@ -109,7 +109,7 @@ See [QUICKSTART.md](QUICKSTART.md) for keybindings and everyday tasks.
 
 ```bash
 ./verify.sh
-./run.sh --verify
+./install.sh --verify
 ```
 
 The verifier is read-only. It checks groups, packages, `swayctl`, the 12-palette
@@ -119,7 +119,7 @@ required item is missing.
 ## Layout
 
 ```text
-run.sh               step runner (core, desktop, engineering, apps, utils)
+install.sh               step runner (core, desktop, engineering, apps, utils)
 install.sh           unattended installer wrapper
 verify.sh            read-only end-state audit
 swayctl/             CLI router, libraries, templates and 12 palettes

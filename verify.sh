@@ -5,7 +5,7 @@
 # One-pass check of the toolkit's expected end state:
 # group membership, key packages, swayctl + 12-palette
 # theme engine, sway config/wallpaper, engineering stack,
-# app defaults, and services. Run via `run.sh --verify`
+# app defaults, and services. Run via `install.sh --verify`
 # or standalone after a run.
 #
 # Prints PASS/FAIL/WARN and exits non-zero on any critical
@@ -169,7 +169,7 @@ cfg "gammastep/config.ini" "$HOME/.config/gammastep/config.ini"
 if [ -e "$HOME/.local/share/swayctl/themes/_base/tpl/waybar" ]; then
     report "waybar remnants" fail "installed tpl still present -- re-run 21-swayctl-cli.sh"
 elif [ -d "$HOME/.config/waybar" ]; then
-    report "waybar remnants" warn "~/.config/waybar still exists -- remove if unused (rm -rf ~/.config/waybar)"
+    report "waybar remnants" warn "$HOME/.config/waybar still exists -- remove if unused (rm -rf $HOME/.config/waybar)"
 else
     report "waybar remnants" ok "none -- single built-in bar"
 fi
